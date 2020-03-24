@@ -3,6 +3,8 @@
   height: 100%;
 
   pre#title {
+    display: flex;
+    flex-direction: column;
     font-size: 1.75rem;
     font-weight: bold;
     color: white;
@@ -15,9 +17,22 @@
     padding: 20px;
     background-color: rgba(61, 61, 61, 0.5);
 
+    span.divider {
+      width: 100%;
+      height: 1px;
+      background-color: white;
+      display: inline-block;
+      margin: 8px 0;
+    }
+
     .nixwhite {
-      font-size: 50%;
+      font-size: 45%;
       font-weight: normal;
+    }
+
+    p.worldTotal {
+      margin: 10px 0;
+      color: lighten(@milanored, 20%);
     }
   }
 

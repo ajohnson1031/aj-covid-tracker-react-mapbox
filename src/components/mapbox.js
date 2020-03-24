@@ -14,7 +14,8 @@ const MapboxGLMap = ({ state }) => {
   const mapContainer = useRef(null);
 
   useEffect(() => {
-    mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
+    mapboxgl.accessToken =
+      "pk.eyJ1IjoiYWpvaG5zb24xMDMxIiwiYSI6ImNqNGgwM2p3dTA4amkzMm4xa3UybTNvc2cifQ.w6P87_Nfy48Nsqc3aV7itQ";
     const initializeMap = ({ setMap, mapContainer }) => {
       const map = new mapboxgl.Map({
         container: mapContainer.current,
@@ -34,8 +35,7 @@ const MapboxGLMap = ({ state }) => {
             "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/1/query?where=1%3D1&outFields=*&outSR=4326&f=json"
           )
           .then(res => {
-            console.log(res.data.features[0]);
-            res.data.features.map(_ =>
+            res.data.features.map(_ => {
               feats.push({
                 id: _.attributes.OBJECTID,
                 type: "Feature",
@@ -52,8 +52,10 @@ const MapboxGLMap = ({ state }) => {
                   coordinates: [_.geometry.x, _.geometry.y],
                   type: "Point"
                 }
-              })
-            );
+              });
+
+              state.countCases(_.attributes.Confirmed);
+            });
           })
           .catch(err => console.log(err))
           .finally(_ => {
