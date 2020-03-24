@@ -129,6 +129,8 @@ const MapboxGLMap = ({ state }) => {
             map.on("mouseleave", "points", function() {
               map.getCanvas().style.cursor = "";
             });
+
+            console.log(map.getLayer("points"));
           });
       });
     };
