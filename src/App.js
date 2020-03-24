@@ -7,7 +7,7 @@ function App(state, props) {
     <div className='App'>
       <div className='map-container'>
         <pre id='title'>
-          <p>World COVID-19 Map</p>
+          <p>World Corona Virus Map</p>
           <span className='nixwhite'>[Click A Circle To See Stats]</span>
         </pre>
         <MapboxGLMap id='map' state={state} />
