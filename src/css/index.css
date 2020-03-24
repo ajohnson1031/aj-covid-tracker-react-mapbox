@@ -167,6 +167,13 @@ table {
 .map-container .mapboxgl-popup-tip {
   opacity: 0.8;
 }
+.map-container .mapboxgl-popup-close-button {
+  font-size: 13px;
+  outline: none;
+}
+.map-container .mapboxgl-popup-close-button:hover {
+  color: #b52200;
+}
 .map-container .mapboxgl-popup-content {
   background-color: rgba(255, 255, 255, 0.8);
   width: 300px;
