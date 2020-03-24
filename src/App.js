@@ -1,26 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { connect } from "react-redux";
+import MapboxGLMap from "./components/mapbox";
 
-function App() {
+function App(state, props) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <div className='map-container'>
+        <pre id='title'>
+          <p>World COVID-19 Map</p>
+          <span className='nixwhite'>[Click A Circle To See Stats]</span>
+        </pre>
+        <MapboxGLMap id='map' state={state} />
+      </div>
     </div>
   );
 }
+const mapStateToProps = state => ({ state: state });
 
-export default App;
+export default connect(mapStateToProps)(App);

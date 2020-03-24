@@ -1,0 +1,208 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+  font-size: 62.5%;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+* {
+  box-sizing: border-box;
+}
+.map-container {
+  width: 100%;
+  height: 100%;
+}
+.map-container pre#title {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  padding: 20px;
+  background-color: rgba(61, 61, 61, 0.5);
+}
+.map-container pre#title .nixwhite {
+  font-size: 50%;
+  font-weight: normal;
+}
+.map-container .map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+.map-container .mapboxgl-popup-content {
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 300px;
+  height: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.map-container .mapboxgl-popup-content h3 {
+  font-size: 1.4rem;
+}
+.map-container .mapboxgl-popup-content span.divider {
+  width: 100%;
+  height: 1px;
+  background-color: #000;
+  display: inline-block;
+  margin: 5px 0 5px;
+}
+.map-container .mapboxgl-popup-content p.ps-total {
+  display: flex;
+  flex-direction: column;
+  color: #b52200;
+  font-size: 1.4rem;
+  font-weight: 700;
+  padding-bottom: 8px;
+}
+.map-container .mapboxgl-popup-content p.ps-total .nix {
+  font-size: 62.5%;
+  font-weight: normal;
+  color: black;
+  line-height: 200%;
+}
+.map-container .mapboxgl-popup-content ul {
+  margin: 5px 0 0;
+  font-size: 110%;
+}
+.map-container .mapboxgl-popup-content ul li {
+  text-indent: 10px;
+  margin-left: -20px;
+}
+.map-container .mapboxgl-popup-content ul li::before {
+  content: "\2022";
+  font-weight: bold;
+  font-size: 200%;
+  display: inline-block;
+  width: 1em;
+  position: relative;
+  top: 5px;
+}
+.map-container .mapboxgl-popup-content ul li.active::before {
+  color: #c4941d;
+}
+.map-container .mapboxgl-popup-content ul li.recovered::before {
+  color: #009a00;
+}

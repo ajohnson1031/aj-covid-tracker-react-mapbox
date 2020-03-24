@@ -1,0 +1,94 @@
+.map-container {
+  width: 100%;
+  height: 100%;
+
+  pre#title {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    padding: 20px;
+    background-color: rgba(61, 61, 61, 0.5);
+
+    .nixwhite {
+      font-size: 50%;
+      font-weight: normal;
+    }
+  }
+
+  .map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+  }
+  .mapboxgl-popup-content {
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 300px;
+    height: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+      font-size: 1.4rem;
+    }
+
+    span.divider {
+      width: 100%;
+      height: 1px;
+      background-color: #000;
+      display: inline-block;
+      margin: 5px 0 5px;
+    }
+
+    p.ps-total {
+      display: flex;
+      flex-direction: column;
+      color: @milanored;
+      font-size: 1.4rem;
+      font-weight: 700;
+      padding-bottom: 8px;
+
+      .nix {
+        font-size: 62.5%;
+        font-weight: normal;
+        color: black;
+        line-height: 200%;
+      }
+    }
+
+    ul {
+      margin: 5px 0 0;
+      font-size: 110%;
+
+      li {
+        text-indent: 10px;
+        margin-left: -20px;
+      }
+
+      li::before {
+        content: "\2022";
+        font-weight: bold;
+        font-size: 200%;
+        display: inline-block;
+        width: 1em;
+        position: relative;
+        top: 5px;
+      }
+
+      li.active::before {
+        color: darken(goldenrod, 5%);
+      }
+
+      li.recovered::before {
+        color: lighten(green, 5%);
+      }
+    }
+  }
+}
