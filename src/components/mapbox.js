@@ -82,7 +82,7 @@ const MapboxGLMap = ({ state }) => {
                   ["linear"],
                   ["zoom"],
                   2,
-                  ["*", 0.0015, ["number", ["get", "confirmed"]]],
+                  ["*", 0.003, ["number", ["get", "confirmed"]]],
                   3,
                   ["*", 0.003, ["number", ["get", "confirmed"]]],
                   4,
@@ -93,7 +93,48 @@ const MapboxGLMap = ({ state }) => {
               }
             });
 
+            map.addLayer({
+              id: "pointsOver",
+              source: "infected",
+              type: "circle",
+              paint: {
+                "circle-color": "#FB6E6E",
+                "circle-opacity": 0,
+                "circle-stroke-width": 2,
+                "circle-stroke-color": "#FB6E6E",
+                "circle-stroke-opacity": 0.2,
+                "circle-radius": 8
+              }
+            });
+
             map.on("click", "points", function(e) {
+              map.flyTo({ center: e.features[0].geometry.coordinates });
+              const coordinates = e.features[0].geometry.coordinates.slice();
+              const ps = e.features[0].properties.province_state;
+              const cr = e.features[0].properties.country_region;
+              const c = e.features[0].properties.confirmed;
+              const r = e.features[0].properties.recovered;
+              const f = e.features[0].properties.deaths;
+              console.log(ps);
+              // Ensure that if the map is zoomed out such that multiple
+              // copies of the feature are visible, the popup appears
+              // over the copy being pointed to.
+              while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+              }
+
+              //<li class="active">Active</li>
+              new mapboxgl.Popup()
+                .setLngLat(coordinates)
+                .setHTML(
+                  `<h3>${ps !== "null" ? ps : ""} ${
+                    ps !== "null" ? "" : cr
+                  }</h3> <span class="divider"></span> <p class="ps-total"><span class="nix">Total Confirmed Cases</span>${c}</p> <span class="divider"></span> <ul><li class="recovered">Recovered: ${r}</li><li class="fatal">Fatal: ${f}</li></ul>`
+                )
+                .addTo(map);
+            });
+
+            map.on("click", "pointsOver", function(e) {
               map.flyTo({ center: e.features[0].geometry.coordinates });
               const coordinates = e.features[0].geometry.coordinates.slice();
               const ps = e.features[0].properties.province_state;
@@ -127,6 +168,15 @@ const MapboxGLMap = ({ state }) => {
 
             // Change it back to a pointer when it leaves.
             map.on("mouseleave", "points", function() {
+              map.getCanvas().style.cursor = "";
+            });
+
+            map.on("mouseenter", "pointsOver", function() {
+              map.getCanvas().style.cursor = "pointer";
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on("mouseleave", "pointsOver", function() {
               map.getCanvas().style.cursor = "";
             });
 
