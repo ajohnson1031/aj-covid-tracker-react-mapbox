@@ -82,7 +82,7 @@ const MapboxGLMap = ({ state }) => {
                   ["linear"],
                   ["zoom"],
                   2,
-                  ["*", 0.003, ["number", ["get", "confirmed"]]],
+                  ["*", 0.0015, ["number", ["get", "confirmed"]]],
                   3,
                   ["*", 0.003, ["number", ["get", "confirmed"]]],
                   4,
