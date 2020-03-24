@@ -115,7 +115,7 @@ const MapboxGLMap = ({ state }) => {
               const c = e.features[0].properties.confirmed;
               const r = e.features[0].properties.recovered;
               const f = e.features[0].properties.deaths;
-              console.log(ps);
+
               // Ensure that if the map is zoomed out such that multiple
               // copies of the feature are visible, the popup appears
               // over the copy being pointed to.
@@ -142,7 +142,6 @@ const MapboxGLMap = ({ state }) => {
               const c = e.features[0].properties.confirmed;
               const r = e.features[0].properties.recovered;
               const f = e.features[0].properties.deaths;
-              console.log(ps);
               // Ensure that if the map is zoomed out such that multiple
               // copies of the feature are visible, the popup appears
               // over the copy being pointed to.
@@ -179,8 +178,6 @@ const MapboxGLMap = ({ state }) => {
             map.on("mouseleave", "pointsOver", function() {
               map.getCanvas().style.cursor = "";
             });
-
-            console.log(map.getLayer("points"));
           });
       });
     };
