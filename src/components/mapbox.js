@@ -55,6 +55,13 @@ const MapboxGLMap = ({ state }) => {
               });
 
               state.countCases(_.attributes.Confirmed);
+              state.highestRates([
+                _.attributes.Province_State,
+                _.attributes.Country_Region,
+                _.attributes.Confirmed,
+                _.attributes.Deaths,
+                _.attributes.Recovered
+              ]);
             });
           })
           .catch(err => console.log(err))
