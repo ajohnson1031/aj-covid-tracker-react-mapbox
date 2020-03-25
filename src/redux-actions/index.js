@@ -27,6 +27,8 @@ export const highestRates = highest => dispatch => {
   const RecoveryRate =
     Recovered === 0 && Confirmed === 0
       ? 0
+      : Recovered === Confirmed && Deaths > 0
+      ? Number(((Recovered - Deaths) / Confirmed) * 100).toFixed(2)
       : Number(Recovered / Confirmed) * 100 === Infinity
       ? 0
       : isNaN(Number(Recovered / Confirmed) * 100)
