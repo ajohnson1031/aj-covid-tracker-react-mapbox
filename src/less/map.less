@@ -2,101 +2,135 @@
   width: 100%;
   height: 100%;
 
-  pre#sidebar {
-    display: flex;
-    flex-direction: column;
-    font-size: 1.75rem;
+  .shbutton {
+    font-size: 45%;
+    font-weight: normal;
+    color: white;
     font-weight: bold;
     color: white;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
       Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    background-color: rgba(61, 61, 61, 0.5);
+    padding: 25px 20px 5px;
+    position: absolute;
+    z-index: 30;
+    width: 450px;
+
+    span {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 4px;
+      background-color: rgba(255, 255, 255, 0.08);
+      cursor: pointer;
+      user-select: none;
+      &:hover {
+        color: lightskyblue;
+      }
+    }
+  }
+
+  div#sidebar-outer {
+    position: absolute;
+    top: 59px;
+    left: 0;
     height: 100vh;
     width: 100%;
     max-width: 450px;
+    z-index: 1;
 
-    .sidebar-inner-container:not(:first-child) {
-      margin-top: -15px;
-    }
-    .sidebar-inner-container {
-      display: flex;
+    pre#sidebar {
       flex-direction: column;
-      box-sizing: border-box;
-      margin: 0 20px 20px;
-      padding: 20px;
-      border-radius: 4px;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
+      font-size: 1.75rem;
+      font-weight: bold;
+      color: white;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: rgba(61, 61, 61, 0.5);
+      height: inherit;
+      width: inherit;
+      max-width: inherit;
 
-    .light {
-      background-color: rgba(255, 255, 255, 0.05);
-    }
-
-    .goldenrod-text {
-      color: darken(goldenrod, 5%);
-    }
-
-    .green-text {
-      color: lighten(green, 20%);
-    }
-
-    .red-text {
-      color: lighten(@milanored, 30%);
-    }
-
-    .stat {
-      display: inline-block;
-      font-size: 0.75rem;
-      line-height: 1.2rem;
-      padding: 10px;
-      border: 1px solid darken(@silverchalice, 20%);
-      border-radius: 4px;
-      margin-bottom: 10px;
-      width: calc(50% - 10px);
-
-      @media only screen and (max-width: 600px) {
-        width: 100%;
+      .nixwhite {
+        font-size: 45%;
+        font-weight: normal;
+        color: white;
+        padding: 0;
+        background: none;
       }
-    }
 
-    .no-column {
-      flex-direction: row;
-
-      @media only screen and (max-width: 600px) {
+      .sidebar-inner-container:not(:first-child) {
+        margin-top: -15px;
+      }
+      .sidebar-inner-container {
+        display: flex;
         flex-direction: column;
+        box-sizing: border-box;
+        margin: 0 20px 20px;
+        padding: 20px;
+        border-radius: 4px;
+        justify-content: space-between;
+        flex-wrap: wrap;
       }
-    }
 
-    .stat-entry {
-      display: inline-block;
-      text-indent: 5px;
-
-      &::before {
-        content: "↳ ";
+      .light {
+        background-color: rgba(255, 255, 255, 0.05);
       }
-    }
 
-    span.divider {
-      width: 100%;
-      height: 1px;
-      background-color: white;
-      display: inline-block;
-      margin: 8px 0;
-    }
+      .goldenrod-text {
+        color: darken(goldenrod, 5%);
+      }
 
-    .nixwhite {
-      font-size: 45%;
-      font-weight: normal;
-    }
+      .green-text {
+        color: lighten(green, 20%);
+      }
 
-    p.worldTotal {
-      margin: 10px 0;
-      color: lighten(@milanored, 20%);
+      .red-text {
+        color: lighten(@milanored, 30%);
+      }
+
+      .stat {
+        display: inline-block;
+        font-size: 0.75rem;
+        line-height: 1.2rem;
+        padding: 10px;
+        border: 1px solid darken(@silverchalice, 20%);
+        border-radius: 4px;
+        margin-bottom: 10px;
+        width: calc(50% - 10px);
+
+        @media only screen and (max-width: 600px) {
+          width: 100%;
+        }
+      }
+
+      .no-column {
+        flex-direction: row;
+
+        @media only screen and (max-width: 600px) {
+          flex-direction: column;
+        }
+      }
+
+      .stat-entry {
+        display: inline-block;
+        text-indent: 5px;
+
+        &::before {
+          content: "↳ ";
+        }
+      }
+
+      span.divider {
+        width: 100%;
+        height: 1px;
+        background-color: white;
+        display: inline-block;
+        margin: 8px 0;
+      }
+
+      p.worldTotal {
+        margin: 10px 0;
+        color: lighten(@milanored, 20%);
+      }
     }
   }
 

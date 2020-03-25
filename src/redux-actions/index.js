@@ -2,6 +2,7 @@ export const COUNT_CASES = "COUNT_CASES";
 export const HIGHEST_RATES = "HIGHEST_RATES";
 export const HIGHEST_DEATHS = "HIGHEST_DEATHS";
 export const HIGHEST_RECOVERED = "HIGHEST_RECOVERED";
+export const SHOW_HIDE = "SHOW_HIDE";
 
 export const countCases = confirmed => dispatch => {
   dispatch({ type: COUNT_CASES, payload: confirmed });
@@ -19,7 +20,7 @@ export const highestRates = highest => dispatch => {
       ? 0
       : Number(Deaths / Confirmed) * 100 === Infinity
       ? 0
-      : Number(Deaths / Confirmed) * 100 === NaN
+      : isNaN(Number(Deaths / Confirmed) * 100)
       ? 0
       : Number((Deaths / Confirmed) * 100).toFixed(2);
 
@@ -28,7 +29,7 @@ export const highestRates = highest => dispatch => {
       ? 0
       : Number(Recovered / Confirmed) * 100 === Infinity
       ? 0
-      : Number(Recovered / Confirmed) * 100 === NaN
+      : isNaN(Number(Recovered / Confirmed) * 100)
       ? 0
       : Number((Recovered / Confirmed) * 100).toFixed(2);
 
@@ -59,4 +60,8 @@ export const highestRates = highest => dispatch => {
       RecoveryTotal: Number(Recovered)
     }
   });
+};
+
+export const showHide = () => dispatch => {
+  dispatch({ type: SHOW_HIDE });
 };

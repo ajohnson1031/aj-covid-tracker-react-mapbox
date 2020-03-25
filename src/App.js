@@ -1,85 +1,97 @@
 import React from "react";
 import { connect } from "react-redux";
 import MapboxGLMap from "./components/mapbox";
-import { countCases, highestRates } from "./redux-actions";
+import { countCases, highestRates, showHide } from "./redux-actions";
 
 function App(state) {
   return (
     <div className='App'>
       <div className='map-container'>
-        <pre id='sidebar'>
-          <div className='sidebar-inner-container'>
-            <p>World Corona Virus Map</p> <span className='divider'></span>
-            <span className='nixwhite'>Total Confirmed Cases:</span>
-            <p className='worldTotal'>
-              {state.state.worldTotal !== 0 ? state.state.worldTotal : null}
-            </p>
-            <span className='nixwhite'>[Click A Circle To See Stats]</span>
-          </div>
+        <div
+          className='shbutton nixwhite'
+          onClick={state.showHide}
+          style={state.buttonInfo.styleA}
+        >
+          <span>{state.buttonInfo.text}</span>
+        </div>
 
-          <div className='sidebar-inner-container light no-column'>
-            <p className='stat'>
-              Highest Death Count: <br />
-              <span className='stat-entry'>
-                {state.state.highestDeathTotal.Province_State !== null
-                  ? `${state.state.highestDeathTotal.Province_State}, `
-                  : `${state.state.highestDeathTotal.Country_Region}, `}
-                <span className='red-text'>
-                  {state.state.highestDeathTotal.DeathTotal !== 0
-                    ? state.state.highestDeathTotal.DeathTotal
-                    : null}
-                </span>
-              </span>
-            </p>
+        <div id='sidebar-outer' style={state.buttonInfo.styleB}>
+          <pre id='sidebar'>
+            <div className='sidebar-inner-container'>
+              <p>World Corona Virus Map</p> <span className='divider'></span>
+              <span className='nixwhite'>Total Confirmed Cases:</span>
+              <p className='worldTotal'>
+                {state.worldTotal !== 0 ? state.worldTotal : null}
+              </p>
+              <span className='nixwhite'>[Click A Circle To See Stats]</span>
+            </div>
 
-            <p className='stat'>
-              Highest Death Rate: <br />
-              <span className='stat-entry'>
-                {state.state.highestDeathRate.Province_State !== null
-                  ? `${state.state.highestDeathRate.Province_State}, `
-                  : `${state.state.highestDeathRate.Country_Region}, `}
-                <span className='red-text'>
-                  {state.state.highestDeathRate.DeathRate !== 0
-                    ? state.state.highestDeathRate.DeathRate
-                    : null}
+            <div className='sidebar-inner-container light no-column'>
+              <p className='stat'>
+                Highest Death Count: <br />
+                <span className='stat-entry'>
+                  {state.highestDeathTotal.Province_State !== null
+                    ? `${state.highestDeathTotal.Province_State}, `
+                    : `${state.highestDeathTotal.Country_Region}, `}
+                  <span className='red-text'>
+                    {state.highestDeathTotal.DeathTotal !== 0
+                      ? state.highestDeathTotal.DeathTotal
+                      : null}
+                  </span>
                 </span>
-              </span>
-            </p>
+              </p>
 
-            <p className='stat'>
-              Highest Recovery Count: <br />
-              <span className='stat-entry'>
-                {state.state.highestRecoveredTotal.Province_State !== null
-                  ? `${state.state.highestRecoveredTotal.Province_State}, `
-                  : `${state.state.highestRecoveredTotal.Country_Region}, `}
-                <span className='green-text'>
-                  {state.state.highestRecoveredTotal.RecoveryTotal !== 0
-                    ? state.state.highestRecoveredTotal.RecoveryTotal
-                    : null}
+              <p className='stat'>
+                Highest Death Rate: <br />
+                <span className='stat-entry'>
+                  {state.highestDeathRate.Province_State !== null
+                    ? `${state.highestDeathRate.Province_State}, `
+                    : `${state.highestDeathRate.Country_Region}, `}
+                  <span className='red-text'>
+                    {state.highestDeathRate.DeathRate !== 0
+                      ? state.highestDeathRate.DeathRate
+                      : null}
+                  </span>
                 </span>
-              </span>
-            </p>
+              </p>
 
-            <p className='stat'>
-              Highest Recovery Rate: <br />
-              <span className='stat-entry'>
-                {state.state.highestRecoveredRate.Province_State !== null
-                  ? `${state.state.highestRecoveredRate.Province_State}, `
-                  : `${state.state.highestRecoveredRate.Country_Region}, `}
-                <span className='green-text'>
-                  {state.state.highestRecoveredRate.RecoveryRate !== 0
-                    ? state.state.highestRecoveredRate.RecoveryRate
-                    : null}
+              <p className='stat'>
+                Highest Recovery Count: <br />
+                <span className='stat-entry'>
+                  {state.highestRecoveredTotal.Province_State !== null
+                    ? `${state.highestRecoveredTotal.Province_State}, `
+                    : `${state.highestRecoveredTotal.Country_Region}, `}
+                  <span className='green-text'>
+                    {state.highestRecoveredTotal.RecoveryTotal !== 0
+                      ? state.highestRecoveredTotal.RecoveryTotal
+                      : null}
+                  </span>
                 </span>
-              </span>
-            </p>
-          </div>
-        </pre>
+              </p>
+
+              <p className='stat'>
+                Highest Recovery Rate: <br />
+                <span className='stat-entry'>
+                  {state.highestRecoveredRate.Province_State !== null
+                    ? `${state.highestRecoveredRate.Province_State}, `
+                    : `${state.highestRecoveredRate.Country_Region}, `}
+                  <span className='green-text'>
+                    {state.highestRecoveredRate.RecoveryRate !== 0
+                      ? state.highestRecoveredRate.RecoveryRate
+                      : null}
+                  </span>
+                </span>
+              </p>
+            </div>
+          </pre>
+        </div>
         <MapboxGLMap id='map' state={state} />
       </div>
     </div>
   );
 }
-const mapStateToProps = state => ({ state: state });
+const mapStateToProps = state => state;
 
-export default connect(mapStateToProps, { countCases, highestRates })(App);
+export default connect(mapStateToProps, { countCases, highestRates, showHide })(
+  App
+);

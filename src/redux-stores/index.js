@@ -24,6 +24,11 @@ const initialState = {
     Province_State: null,
     Country_Region: null,
     RecoveryTotal: 0
+  },
+  buttonInfo: {
+    text: "[HIDE]",
+    styleA: { background: "rgba(61, 61, 61, 0.5)" },
+    styleB: { display: "flex" }
   }
 };
 

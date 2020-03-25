@@ -3,7 +3,8 @@ import {
   COUNT_CASES,
   HIGHEST_RATES,
   HIGHEST_DEATHS,
-  HIGHEST_RECOVERED
+  HIGHEST_RECOVERED,
+  SHOW_HIDE
 } from "../redux-actions";
 
 export const reducer = (state = initialState, action) => {
@@ -41,6 +42,24 @@ export const reducer = (state = initialState, action) => {
           state.highestRecoveredTotal.RecoveryTotal
             ? action.payload
             : state.highestRecoveredTotal
+      };
+
+    case SHOW_HIDE:
+      console.log("hello");
+      return {
+        ...state,
+        buttonInfo:
+          state.buttonInfo.text === "[HIDE]"
+            ? {
+                text: "[SHOW STATS]",
+                styleA: { background: "none" },
+                styleB: { display: "none" }
+              }
+            : {
+                text: "[HIDE]",
+                styleA: { background: "rgba(61, 61, 61, 0.5)" },
+                styleB: { display: "flex" }
+              }
       };
     default:
       return state;

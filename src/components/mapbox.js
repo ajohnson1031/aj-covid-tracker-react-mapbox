@@ -20,8 +20,8 @@ const MapboxGLMap = ({ state }) => {
       const map = new mapboxgl.Map({
         container: mapContainer.current,
         style: "mapbox://styles/ajohnson1031/ck84r3wfc05wa1ipbebi8dh51", // stylesheet location
-        center: [state.state.lat, state.state.lng],
-        zoom: state.state.zoom
+        center: [state.lat, state.lng],
+        zoom: state.zoom
       });
 
       map.on("load", () => {
@@ -180,7 +180,7 @@ const MapboxGLMap = ({ state }) => {
     };
 
     if (!map) initializeMap({ setMap, mapContainer });
-  }, [map, state.state.lat, state.state.lng, state.state.zoom]);
+  }, [map, state, state.lat, state.lng, state.zoom]);
 
   return <div ref={el => (mapContainer.current = el)} style={styles} />;
 };
