@@ -152,6 +152,16 @@ table {
 .map-container .shbutton span:hover {
   color: white;
 }
+@media only screen and (max-width: 600px) {
+  .map-container .shbutton {
+    width: 100%;
+    font-size: 110%;
+  }
+  .map-container .shbutton span {
+    width: 100%;
+    text-align: center;
+  }
+}
 .map-container div#sidebar-outer {
   position: absolute;
   top: 59px;
