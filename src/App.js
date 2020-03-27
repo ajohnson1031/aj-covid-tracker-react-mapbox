@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import { Icon } from "semantic-ui-react";
+import "semantic-ui-css/semantic.min.css";
 import { connect } from "react-redux";
 import MapboxGLMap from "./components/mapbox";
 import NewsFeed from "./components/newsfeed";
@@ -26,12 +28,24 @@ function App(state) {
           style={state.buttonInfo.styleA}
         >
           <span>{state.buttonInfo.text}</span>
+
+          <a
+            class='cb_button'
+            href='https://commerce.coinbase.com/checkout/2fbfa5e2-829f-44e8-8830-30734b1050ad'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            <Icon name='coffee' />
+            &nbsp;Cup 'o Joe?
+          </a>
+          <script src='https://commerce.coinbase.com/v1/checkout.js?version=201807'></script>
         </div>
 
         <div id='sidebar-outer' style={state.buttonInfo.styleB}>
           <pre id='sidebar'>
             <div className='sidebar-inner-container'>
-              <p>World Corona Virus Map</p> <span className='divider'></span>
+              <p className='page-title'>World Corona Virus Map</p>{" "}
+              <span className='divider'></span>
               <span className='nixwhite'>Total Confirmed Cases:</span>
               <p className='worldTotal'>
                 {state.worldTotal !== 0 ? state.worldTotal : null}
@@ -99,7 +113,7 @@ function App(state) {
 
             {state.location && (
               <div className='news-inner-container'>
-                <span className='nixwhite'>
+                <span className='nixwhite stories'>
                   <strong>Related News Stories from {state.location}</strong>:
                   <br />
                   <a
