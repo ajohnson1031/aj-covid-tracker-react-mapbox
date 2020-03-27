@@ -8,6 +8,7 @@ export const SHOW_HIDE = "SHOW_HIDE";
 export const GET_MAP_KEY = "GET_MAP_KEY";
 export const GET_NEWS_KEY = "GET_NEWS_KEY";
 export const GET_COINBASE_ID = "GET_COINBASE_ID";
+export const CHANGE_MAPVIEW = "CHANGE_MAPVIEW";
 export const LOCATION_CLICKED = "LOCATION_CLICKED";
 
 export const locationClicked = location => dispatch => {
@@ -112,4 +113,8 @@ export const getNewsKey = () => dispatch => {
   } catch (error) {
     console.log("Error: ", error);
   }
+};
+
+export const changeMapView = () => dispatch => {
+  dispatch({ type: CHANGE_MAPVIEW });
 };

@@ -33,6 +33,7 @@ const initialState = {
   mkey: null,
   nkey: null,
   cbkey: null,
+  mapview: "confirmed",
   location: "United States"
 };
 

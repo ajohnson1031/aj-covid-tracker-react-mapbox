@@ -78,6 +78,7 @@ const MapboxGLMap = ({ state }) => {
               id: "points",
               source: "infected",
               type: "circle",
+              layout: { visibility: "visible" },
               paint: {
                 "circle-color": "#FB6E6E",
                 "circle-opacity": 0.5,
@@ -104,6 +105,7 @@ const MapboxGLMap = ({ state }) => {
               id: "pointsOver",
               source: "infected",
               type: "circle",
+              layout: { visibility: "visible" },
               paint: {
                 "circle-color": "#FB6E6E",
                 "circle-opacity": 0,
@@ -113,6 +115,55 @@ const MapboxGLMap = ({ state }) => {
                 "circle-radius": 10
               }
             });
+
+            map.addLayer({
+              id: "rec-points",
+              source: "infected",
+              type: "circle",
+              layout: { visibility: "none" },
+              paint: {
+                "circle-color": "#00E600",
+                "circle-opacity": 0.5,
+                "circle-stroke-width": 2,
+                "circle-stroke-color": "#00E600",
+                "circle-stroke-opacity": 0.8,
+                "circle-radius": [
+                  "interpolate",
+                  ["linear"],
+                  ["zoom"],
+                  2,
+                  ["*", 0.0015, ["number", ["get", "recovered"]]],
+                  3,
+                  ["*", 0.003, ["number", ["get", "recovered"]]],
+                  4,
+                  ["*", 0.005, ["number", ["get", "recovered"]]],
+                  5,
+                  ["*", 0.005, ["number", ["get", "recovered"]]]
+                ]
+              }
+            });
+
+            map.addLayer({
+              id: "rec-pointsOver",
+              source: "infected",
+              type: "circle",
+              layout: { visibility: "none" },
+              paint: {
+                "circle-color": "#00E600",
+                "circle-opacity": 0,
+                "circle-stroke-width": 2,
+                "circle-stroke-color": "#00E600",
+                "circle-stroke-opacity": 0.2,
+                "circle-radius": 10
+              }
+            });
+
+            const layerArr = [
+              "points",
+              "pointsOver",
+              "rec-points",
+              "rec-pointsOver"
+            ];
 
             function clickMap(e) {
               map.flyTo({ center: e.features[0].geometry.coordinates });
@@ -159,8 +210,9 @@ const MapboxGLMap = ({ state }) => {
             }
 
             map.on("click", "points", clickMap);
-
             map.on("click", "pointsOver", clickMap);
+            map.on("click", "rec-points", clickMap);
+            map.on("click", "rec-pointsOver", clickMap);
 
             map.on("mouseenter", "points", function() {
               enterPoint();
@@ -177,13 +229,51 @@ const MapboxGLMap = ({ state }) => {
             map.on("mouseleave", "pointsOver", function() {
               leavePoint();
             });
+
+            map.on("mouseenter", "rec-points", function() {
+              enterPoint();
+            });
+
+            map.on("mouseleave", "rec-points", function() {
+              leavePoint();
+            });
+
+            map.on("mouseenter", "rec-pointsOver", function() {
+              enterPoint();
+            });
+
+            map.on("mouseleave", "rec-pointsOver", function() {
+              leavePoint();
+            });
           });
       });
     };
 
     if (!map) initializeMap({ setMap, mapContainer });
   }, [map, state.lat, state.lng, state.zoom]);
+  if (map) {
+    map.setLayoutProperty(
+      "points",
+      "visibility",
+      state.mapview === "confirmed" ? "visible" : "none"
+    );
+    map.setLayoutProperty(
+      "pointsOver",
+      "visibility",
+      state.mapview === "confirmed" ? "visible" : "none"
+    );
 
+    map.setLayoutProperty(
+      "rec-points",
+      "visibility",
+      state.mapview === "recovered" ? "visible" : "none"
+    );
+    map.setLayoutProperty(
+      "rec-pointsOver",
+      "visibility",
+      state.mapview === "recovered" ? "visible" : "none"
+    );
+  }
   return <div ref={el => (mapContainer.current = el)} style={styles} />;
 };
 

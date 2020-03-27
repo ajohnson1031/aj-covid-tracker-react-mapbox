@@ -13,6 +13,14 @@
     width: 450px;
     font-size: 0.7rem;
 
+    .confirmed {
+      background-color: rgba(251, 110, 110, 0.6);
+    }
+
+    .recovered {
+      background-color: rgba(0, 230, 0, 0.5);
+    }
+
     span,
     .cb_button {
       display: inline-block;
@@ -27,6 +35,9 @@
       }
     }
 
+    span:not(:first-child) {
+      margin-left: 10px;
+    }
     .cb_button {
       margin-left: 10px;
       background-color: rgba(29, 132, 172, 0.6);
@@ -40,9 +51,12 @@
     @media only screen and (max-width: 600px) {
       width: 100%;
       font-size: 110%;
-      span {
+
+      span,
+      .cb_button {
         width: auto;
         text-align: center;
+        padding: 10px;
       }
     }
   }

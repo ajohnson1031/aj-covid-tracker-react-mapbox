@@ -12,6 +12,7 @@ import {
   getMapKey,
   getNewsKey,
   getCoinBaseID,
+  changeMapView,
   locationClicked
 } from "./redux-actions";
 
@@ -24,16 +25,15 @@ function App(state) {
   return (
     <div className='App'>
       <div className='map-container'>
-        <div
-          className='shbutton nixwhite'
-          onClick={state.showHide}
-          style={state.buttonInfo.styleA}
-        >
-          <span>{state.buttonInfo.text}</span>
+        <div className='shbutton nixwhite' style={state.buttonInfo.styleA}>
+          <span onClick={state.showHide}>{state.buttonInfo.text}</span>
+          <span className={state.mapview} onClick={state.changeMapView}>
+            Toggle Map
+          </span>
           {state.cbkey && (
             <>
               <a
-                class='cb_button'
+                className='cb_button'
                 href={`https://commerce.coinbase.com/checkout/${state.cbkey}`}
                 target='_blank'
                 rel='noopener noreferrer'
@@ -151,5 +151,6 @@ export default connect(mapStateToProps, {
   getMapKey,
   getNewsKey,
   getCoinBaseID,
+  changeMapView,
   locationClicked
 })(App);
