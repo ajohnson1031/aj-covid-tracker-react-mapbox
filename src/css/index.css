@@ -206,6 +206,7 @@ strong {
 }
 .map-container div#sidebar-outer pre#sidebar .sidebar-inner-container:first-child {
   margin-bottom: 5px;
+  padding: 10px 0 20px;
 }
 .map-container div#sidebar-outer pre#sidebar .sidebar-inner-container {
   display: flex;
@@ -255,6 +256,8 @@ strong {
 @media only screen and (max-width: 600px) {
   .map-container div#sidebar-outer pre#sidebar .stat {
     font-size: 0.7rem;
+    padding: 8px;
+    width: calc(50% - 5px);
   }
 }
 .map-container div#sidebar-outer pre#sidebar .no-column {
