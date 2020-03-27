@@ -14,8 +14,8 @@ const MapboxGLMap = ({ state }) => {
   const mapContainer = useRef(null);
 
   useEffect(() => {
-    mapboxgl.accessToken =
-      "pk.eyJ1IjoiYWpvaG5zb24xMDMxIiwiYSI6ImNqNGgwM2p3dTA4amkzMm4xa3UybTNvc2cifQ.w6P87_Nfy48Nsqc3aV7itQ";
+    mapboxgl.accessToken = state.mkey;
+
     const initializeMap = ({ setMap, mapContainer }) => {
       const map = new mapboxgl.Map({
         container: mapContainer.current,
@@ -145,6 +145,8 @@ const MapboxGLMap = ({ state }) => {
                 newPopup.addTo(map);
               } else newPopup.addTo(map);
 
+              state.locationClicked([ps, cr]);
+
               e.originalEvent.stopPropagation();
             }
 
@@ -180,7 +182,7 @@ const MapboxGLMap = ({ state }) => {
     };
 
     if (!map) initializeMap({ setMap, mapContainer });
-  }, [map, state, state.lat, state.lng, state.zoom]);
+  }, [map, state.lat, state.lng, state.zoom]);
 
   return <div ref={el => (mapContainer.current = el)} style={styles} />;
 };

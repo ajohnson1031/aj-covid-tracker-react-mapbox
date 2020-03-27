@@ -29,7 +29,10 @@ const initialState = {
     text: "[HIDE]",
     styleA: { background: "rgba(61, 61, 61, 0.5)" },
     styleB: { display: "flex" }
-  }
+  },
+  mkey: null,
+  nkey: null,
+  location: "United States"
 };
 
 export default initialState;

@@ -202,6 +202,16 @@ table {
   justify-content: space-between;
   flex-wrap: wrap;
 }
+.map-container div#sidebar-outer pre#sidebar .news-inner-container {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin: 5px 0 0;
+  padding: 0 20px 20px;
+  border-radius: 4px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
 .map-container div#sidebar-outer pre#sidebar .light {
   background-color: rgba(255, 255, 255, 0.05);
 }
@@ -224,18 +234,11 @@ table {
   margin-bottom: 10px;
   width: calc(50% - 10px);
 }
-@media only screen and (max-width: 600px) {
-  .map-container div#sidebar-outer pre#sidebar .stat {
-    width: 100%;
-  }
-}
 .map-container div#sidebar-outer pre#sidebar .no-column {
   flex-direction: row;
 }
-@media only screen and (max-width: 600px) {
-  .map-container div#sidebar-outer pre#sidebar .no-column {
-    flex-direction: column;
-  }
+.map-container div#sidebar-outer pre#sidebar .no-margin {
+  margin-bottom: 0;
 }
 .map-container div#sidebar-outer pre#sidebar .stat-entry {
   display: inline-block;
@@ -325,4 +328,61 @@ table {
 }
 .map-container .mapboxgl-popup-content ul li.recovered::before {
   color: #009a00;
+}
+.article-container {
+  height: calc(100vh - 500px);
+  width: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
+  margin-top: 15px;
+  padding: 7.5px;
+  border-radius: 4px;
+}
+.article-container a {
+  color: white;
+  text-decoration: none;
+}
+.article-container a:hover {
+  text-decoration: underline;
+}
+.article-container .article-item {
+  height: 100px;
+  padding: 7.5px 0 7.5px 7.5px;
+  display: flex;
+  margin-bottom: 5px;
+  width: 98.5%;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.article-container .article-item .article-img {
+  width: 140px;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+.article-container .article-item .article-text {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 150px);
+  word-wrap: break-word;
+}
+.article-container .article-item .article-text p {
+  width: calc(100% - 10px);
+  height: 60px;
+  font-size: 0.9rem;
+  word-wrap: break-word;
+  white-space: normal;
+  line-height: 125%;
+}
+.article-container .article-item .article-text .article-footer span {
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: normal;
+  color: white;
+  margin-top: 1px;
+  padding: 0;
+  background: none;
+  width: 48%;
+}
+.article-container .article-item .article-text .article-footer .right {
+  text-align: right;
 }

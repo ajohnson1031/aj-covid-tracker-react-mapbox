@@ -1,8 +1,17 @@
+import axios from "axios";
+
 export const COUNT_CASES = "COUNT_CASES";
 export const HIGHEST_RATES = "HIGHEST_RATES";
 export const HIGHEST_DEATHS = "HIGHEST_DEATHS";
 export const HIGHEST_RECOVERED = "HIGHEST_RECOVERED";
 export const SHOW_HIDE = "SHOW_HIDE";
+export const GET_MAP_KEY = "GET_MAP_KEY";
+export const GET_NEWS_KEY = "GET_NEWS_KEY";
+export const LOCATION_CLICKED = "LOCATION_CLICKED";
+
+export const locationClicked = location => dispatch => {
+  dispatch({ type: LOCATION_CLICKED, payload: location });
+};
 
 export const countCases = confirmed => dispatch => {
   dispatch({ type: COUNT_CASES, payload: confirmed });
@@ -66,4 +75,28 @@ export const highestRates = highest => dispatch => {
 
 export const showHide = () => dispatch => {
   dispatch({ type: SHOW_HIDE });
+};
+
+export const getMapKey = () => dispatch => {
+  try {
+    axios
+      .get("https://tranquil-wave-62543.herokuapp.com/keys/mapkey")
+      .then(res => {
+        dispatch({ type: GET_MAP_KEY, payload: res.data.key });
+      });
+  } catch (error) {
+    console.log("Error: ", error);
+  }
+};
+
+export const getNewsKey = () => dispatch => {
+  try {
+    axios
+      .get("https://tranquil-wave-62543.herokuapp.com/keys/newskey")
+      .then(res => {
+        dispatch({ type: GET_NEWS_KEY, payload: res.data.key });
+      });
+  } catch (error) {
+    console.log("Error: ", error);
+  }
 };

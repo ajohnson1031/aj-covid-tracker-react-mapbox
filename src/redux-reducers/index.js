@@ -4,7 +4,10 @@ import {
   HIGHEST_RATES,
   HIGHEST_DEATHS,
   HIGHEST_RECOVERED,
-  SHOW_HIDE
+  SHOW_HIDE,
+  GET_MAP_KEY,
+  GET_NEWS_KEY,
+  LOCATION_CLICKED
 } from "../redux-actions";
 
 export const reducer = (state = initialState, action) => {
@@ -60,6 +63,16 @@ export const reducer = (state = initialState, action) => {
                 styleA: { background: "rgba(61, 61, 61, 0.5)" },
                 styleB: { display: "flex" }
               }
+      };
+    case GET_MAP_KEY:
+      return { ...state, mkey: action.payload };
+    case GET_NEWS_KEY:
+      return { ...state, nkey: action.payload };
+    case LOCATION_CLICKED:
+      return {
+        ...state,
+        location:
+          action.payload[0] !== "null" ? action.payload[0] : action.payload[1]
       };
     default:
       return state;

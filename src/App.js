@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import MapboxGLMap from "./components/mapbox";
-import { countCases, highestRates, showHide } from "./redux-actions";
+import NewsFeed from "./components/newsfeed";
+
+import {
+  countCases,
+  highestRates,
+  showHide,
+  getMapKey,
+  getNewsKey,
+  locationClicked
+} from "./redux-actions";
 
 function App(state) {
+  useEffect(() => {
+    state.getMapKey();
+    state.getNewsKey();
+  }, []);
   return (
     <div className='App'>
       <div className='map-container'>
@@ -55,7 +68,7 @@ function App(state) {
                 </span>
               </p>
 
-              <p className='stat'>
+              <p className='stat no-margin'>
                 Highest Recovery Count: <br />
                 <span className='stat-entry'>
                   {state.highestRecoveredTotal.Province_State !== null
@@ -69,7 +82,7 @@ function App(state) {
                 </span>
               </p>
 
-              <p className='stat'>
+              <p className='stat no-margin'>
                 Highest Recovery Rate: <br />
                 <span className='stat-entry'>
                   {state.highestRecoveredRate.Province_State !== null
@@ -83,15 +96,31 @@ function App(state) {
                 </span>
               </p>
             </div>
+
+            {state.location && (
+              <div className='news-inner-container'>
+                <span className='nixwhite'>
+                  <strong>Related News Stories from {state.location}</strong>:
+                </span>
+                <div className='article-container light'>
+                  <NewsFeed state={state} />
+                </div>
+              </div>
+            )}
           </pre>
         </div>
-        <MapboxGLMap id='map' state={state} />
+        {state.mkey && <MapboxGLMap id='map' state={state} />}
       </div>
     </div>
   );
 }
 const mapStateToProps = state => state;
 
-export default connect(mapStateToProps, { countCases, highestRates, showHide })(
-  App
-);
+export default connect(mapStateToProps, {
+  countCases,
+  highestRates,
+  showHide,
+  getMapKey,
+  getNewsKey,
+  locationClicked
+})(App);
