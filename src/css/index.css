@@ -332,6 +332,16 @@ strong {
 .map-container .mapboxgl-popup-content ul li.recovered::before {
   color: #009a00;
 }
+.attribution {
+  color: white;
+  text-decoration: none;
+  font-size: 80%;
+  display: inline-block;
+  margin-top: 4px;
+}
+.attribution:hover {
+  text-decoration: underline;
+}
 .article-container {
   height: calc(100vh - 500px);
   width: 100%;

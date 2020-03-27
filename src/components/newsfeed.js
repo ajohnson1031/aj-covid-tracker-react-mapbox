@@ -29,7 +29,7 @@ const NewsFeed = ({ state }) => {
                 className='article-img'
               />
               <div className='article-text'>
-                <a href={article.url} target='_blank'>
+                <a href={article.url} target='_blank' rel='noopener noreferrer'>
                   <p>
                     {article.title.length > 75
                       ? article.title.substr(0, 72) + "..."

@@ -101,6 +101,15 @@ function App(state) {
               <div className='news-inner-container'>
                 <span className='nixwhite'>
                   <strong>Related News Stories from {state.location}</strong>:
+                  <br />
+                  <a
+                    className='attribution'
+                    href='https://newsapi.org/'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    powered by NewsAPI.org
+                  </a>
                 </span>
                 <div className='article-container light'>
                   <NewsFeed state={state} />
