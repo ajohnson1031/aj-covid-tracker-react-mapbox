@@ -13,10 +13,10 @@ const NewsFeed = ({ state }) => {
   useEffect(() => {
     axios
       .get(
-        `https://newsapi.org/v2/everything?qInTitle=coronavirus%20${state.location}&from=${today}&apiKey=76ad746b4ebb4949af32ea577842aa21`
+        `https://newsapi.org/v2/everything?qInTitle=coronavirus%20${state.location}&from=${today}&apiKey=${state.nkey}`
       )
       .then(res => setArticles(res.data.articles));
-  }, [state.location]);
+  }, [state.location, state.nkey]);
   return articles && articles.length > 0 ? (
     articles.map((article, i) => {
       return (
@@ -52,7 +52,7 @@ const NewsFeed = ({ state }) => {
       );
     })
   ) : (
-    <p className='no-articles'>No Articles in this Area</p>
+    <p className='no-articles'>No news from this area...</p>
   );
 };
 

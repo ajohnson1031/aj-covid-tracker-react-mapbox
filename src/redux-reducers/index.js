@@ -7,6 +7,7 @@ import {
   SHOW_HIDE,
   GET_MAP_KEY,
   GET_NEWS_KEY,
+  GET_COINBASE_ID,
   LOCATION_CLICKED
 } from "../redux-actions";
 
@@ -68,6 +69,8 @@ export const reducer = (state = initialState, action) => {
       return { ...state, mkey: action.payload };
     case GET_NEWS_KEY:
       return { ...state, nkey: action.payload };
+    case GET_COINBASE_ID:
+      return { ...state, cbkey: action.payload };
     case LOCATION_CLICKED:
       return {
         ...state,

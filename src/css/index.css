@@ -371,7 +371,7 @@ strong {
   line-height: 125%;
 }
 .article-container {
-  height: calc(100vh - 485px);
+  height: calc(100vh - 495px);
   width: 100%;
   overflow: hidden;
   overflow-y: scroll;

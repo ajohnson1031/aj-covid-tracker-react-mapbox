@@ -11,6 +11,7 @@ import {
   showHide,
   getMapKey,
   getNewsKey,
+  getCoinBaseID,
   locationClicked
 } from "./redux-actions";
 
@@ -18,6 +19,7 @@ function App(state) {
   useEffect(() => {
     state.getMapKey();
     state.getNewsKey();
+    state.getCoinBaseID();
   }, []);
   return (
     <div className='App'>
@@ -28,17 +30,20 @@ function App(state) {
           style={state.buttonInfo.styleA}
         >
           <span>{state.buttonInfo.text}</span>
-
-          <a
-            class='cb_button'
-            href='https://commerce.coinbase.com/checkout/2fbfa5e2-829f-44e8-8830-30734b1050ad'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            <Icon name='coffee' />
-            &nbsp;Kuppa Joe?
-          </a>
-          <script src='https://commerce.coinbase.com/v1/checkout.js?version=201807'></script>
+          {state.cbkey && (
+            <>
+              <a
+                class='cb_button'
+                href={`https://commerce.coinbase.com/checkout/${state.cbkey}`}
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                <Icon name='coffee' />
+                &nbsp;Kuppa Joe?
+              </a>
+              <script src='https://commerce.coinbase.com/v1/checkout.js?version=201807'></script>
+            </>
+          )}
         </div>
 
         <div id='sidebar-outer' style={state.buttonInfo.styleB}>
@@ -76,7 +81,7 @@ function App(state) {
                     : `${state.highestDeathRate.Country_Region}, `}
                   <span className='red-text'>
                     {state.highestDeathRate.DeathRate !== 0
-                      ? state.highestDeathRate.DeathRate
+                      ? state.highestDeathRate.DeathRate + "%"
                       : null}
                   </span>
                 </span>
@@ -104,7 +109,7 @@ function App(state) {
                     : `${state.highestRecoveredRate.Country_Region}, `}
                   <span className='green-text'>
                     {state.highestRecoveredRate.RecoveryRate !== 0
-                      ? state.highestRecoveredRate.RecoveryRate
+                      ? state.highestRecoveredRate.RecoveryRate + "%"
                       : null}
                   </span>
                 </span>
@@ -145,5 +150,6 @@ export default connect(mapStateToProps, {
   showHide,
   getMapKey,
   getNewsKey,
+  getCoinBaseID,
   locationClicked
 })(App);

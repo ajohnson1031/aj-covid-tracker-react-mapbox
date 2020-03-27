@@ -32,6 +32,7 @@ const initialState = {
   },
   mkey: null,
   nkey: null,
+  cbkey: null,
   location: "United States"
 };
 
