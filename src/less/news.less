@@ -19,7 +19,6 @@
   width: 100%;
   overflow: hidden;
   overflow-y: scroll;
-  margin-top: 10px;
   padding: 7.5px;
   border-radius: 4px;
 
@@ -63,12 +62,17 @@
 
       p {
         width: calc(100% - 10px);
-        height: 60px;
-        font-size: 1rem;
+        height: 59px;
+        font-size: 0.9rem;
         word-wrap: break-word;
         white-space: normal;
         line-height: 125%;
+
+        @media only screen and (max-width: 600px) {
+          font-size: 0.8rem;
+        }
       }
+
       .article-footer {
         span {
           display: inline-block;
@@ -79,6 +83,10 @@
           padding: 0;
           background: none;
           width: 48%;
+
+          @media only screen and (max-width: 600px) {
+            font-size: 0.65rem;
+          }
         }
 
         .right {

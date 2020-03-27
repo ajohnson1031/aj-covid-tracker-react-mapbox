@@ -83,7 +83,7 @@ function App(state) {
               </p>
 
               <p className='stat no-margin'>
-                Highest Recovery Count: <br />
+                Highest Recov. Count: <br />
                 <span className='stat-entry'>
                   {state.highestRecoveredTotal.Province_State !== null
                     ? `${state.highestRecoveredTotal.Province_State}, `
@@ -97,7 +97,7 @@ function App(state) {
               </p>
 
               <p className='stat no-margin'>
-                Highest Recovery Rate: <br />
+                Highest Recov. Rate: <br />
                 <span className='stat-entry'>
                   {state.highestRecoveredRate.Province_State !== null
                     ? `${state.highestRecoveredRate.Province_State}, `

@@ -54,7 +54,7 @@ export const reducer = (state = initialState, action) => {
         buttonInfo:
           state.buttonInfo.text === "[HIDE]"
             ? {
-                text: "[SHOW STATS]",
+                text: "[SHOW DASH]",
                 styleA: { background: "none" },
                 styleB: { display: "none" }
               }
