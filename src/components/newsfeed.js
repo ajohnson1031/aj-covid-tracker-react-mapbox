@@ -17,8 +17,7 @@ const NewsFeed = ({ state }) => {
       )
       .then(res => setArticles(res.data.articles));
   }, [state.location]);
-  return (
-    articles &&
+  return articles && articles.length > 0 ? (
     articles.map((article, i) => {
       return (
         <div key={i}>
@@ -52,6 +51,8 @@ const NewsFeed = ({ state }) => {
         </div>
       );
     })
+  ) : (
+    <p className='no-articles'>No Articles in this Area</p>
   );
 };
 
