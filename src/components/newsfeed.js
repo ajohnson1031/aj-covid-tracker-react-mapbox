@@ -11,11 +11,12 @@ const NewsFeed = ({ state }) => {
   const today = `${year}-${month}-${day}`;
 
   useEffect(() => {
-    axios
-      .get(
-        `https://newsapi.org/v2/everything?qInTitle=coronavirus%20${state.location}&from=${today}&apiKey=${state.nkey}`
-      )
-      .then(res => setArticles(res.data.articles));
+    state.nkey &&
+      axios
+        .get(
+          `https://newsapi.org/v2/everything?qInTitle=coronavirus%20${state.location}&from=${today}&apiKey=${state.nkey}`
+        )
+        .then(res => setArticles(res.data.articles));
   }, [state.location, state.nkey]);
   return articles && articles.length > 0 ? (
     articles.map((article, i) => {
