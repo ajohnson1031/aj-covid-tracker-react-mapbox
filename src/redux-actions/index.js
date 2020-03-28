@@ -15,8 +15,8 @@ export const locationClicked = location => dispatch => {
   dispatch({ type: LOCATION_CLICKED, payload: location });
 };
 
-export const countCases = confirmed => dispatch => {
-  dispatch({ type: COUNT_CASES, payload: confirmed });
+export const countCases = cases => dispatch => {
+  dispatch({ type: COUNT_CASES, payload: cases });
 };
 
 export const highestRates = highest => dispatch => {
@@ -25,6 +25,8 @@ export const highestRates = highest => dispatch => {
   const Confirmed = highest[2];
   const Deaths = highest[3];
   const Recovered = highest[4];
+  const Lat = highest[5];
+  const Long = highest[6];
 
   const DeathRate =
     Deaths === 0 && Confirmed === 0
@@ -52,7 +54,12 @@ export const highestRates = highest => dispatch => {
       Province_State: Province_State,
       Country_Region: Country_Region,
       DeathRate: Number(DeathRate),
-      RecoveryRate: Number(RecoveryRate)
+      RecoveryRate: Number(RecoveryRate),
+      Lat: Lat,
+      Long: Long,
+      Confirmed: Number(Confirmed),
+      Deaths: Number(Deaths),
+      Recovered: Recovered
     }
   });
 
@@ -61,7 +68,12 @@ export const highestRates = highest => dispatch => {
     payload: {
       Province_State: Province_State,
       Country_Region: Country_Region,
-      DeathTotal: Number(Deaths)
+      DeathTotal: Number(Deaths),
+      Lat: Lat,
+      Long: Long,
+      Confirmed: Number(Confirmed),
+      Deaths: Number(Deaths),
+      Recovered: Recovered
     }
   });
 
@@ -70,7 +82,12 @@ export const highestRates = highest => dispatch => {
     payload: {
       Province_State: Province_State,
       Country_Region: Country_Region,
-      RecoveryTotal: Number(Recovered)
+      RecoveryTotal: Number(Recovered),
+      Lat: Lat,
+      Long: Long,
+      Confirmed: Number(Confirmed),
+      Deaths: Number(Deaths),
+      Recovered: Recovered
     }
   });
 };
@@ -117,4 +134,8 @@ export const getNewsKey = () => dispatch => {
 
 export const changeMapView = () => dispatch => {
   dispatch({ type: CHANGE_MAPVIEW });
+};
+
+export const addComma = str => {
+  return str.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };

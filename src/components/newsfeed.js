@@ -11,7 +11,8 @@ const NewsFeed = ({ state }) => {
   const today = `${year}-${month}-${day}`;
 
   useEffect(() => {
-    state.nkey &&
+    state.worldTotal >= 1000000 &&
+      // state.nkey &&
       axios
         .get(
           `https://newsapi.org/v2/everything?qInTitle=coronavirus%20${state.location}&from=${today}&apiKey=${state.nkey}`
@@ -53,7 +54,7 @@ const NewsFeed = ({ state }) => {
       );
     })
   ) : (
-    <p className='no-articles'>No news from this area...</p>
+    <p className='no-articles'>News feed coming soon...</p>
   );
 };
 

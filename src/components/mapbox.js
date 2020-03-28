@@ -54,13 +54,18 @@ const MapboxGLMap = ({ state }) => {
                 }
               });
 
-              state.countCases(_.attributes.Confirmed);
+              state.countCases([
+                _.attributes.Confirmed,
+                _.attributes.Recovered
+              ]);
               state.highestRates([
                 _.attributes.Province_State,
                 _.attributes.Country_Region,
                 _.attributes.Confirmed,
                 _.attributes.Deaths,
-                _.attributes.Recovered
+                _.attributes.Recovered,
+                _.attributes.Lat,
+                _.attributes.Long_
               ]);
             });
           })
@@ -158,21 +163,157 @@ const MapboxGLMap = ({ state }) => {
               }
             });
 
-            const layerArr = [
-              "points",
-              "pointsOver",
-              "rec-points",
-              "rec-pointsOver"
-            ];
+            const hdc = document.getElementById("hdc");
+            const hdr = document.getElementById("hdr");
+            const hrc = document.getElementById("hrc");
+            const hrr = document.getElementById("hrr");
+
+            [hdc, hdr, hrc, hrr].map(elem =>
+              elem.addEventListener("click", highClick)
+            );
+
+            function highClick(e) {
+              let highest, coordinates, ps, cr, c, r, f, m, rr, fr;
+              switch (e.currentTarget) {
+                case hdc:
+                  highest = document.getElementById("hdci").value.split(",");
+                  if (highest[7] === "recovered") toggleButton.click();
+                  break;
+                case hdr:
+                  highest = document.getElementById("hdri").value.split(",");
+                  if (highest[7] === "recovered") toggleButton.click();
+                  break;
+                case hrc:
+                  highest = document.getElementById("hrci").value.split(",");
+                  if (highest[7] === "confirmed") toggleButton.click();
+                  break;
+                case hrr:
+                  highest = document.getElementById("hrri").value.split(",");
+                  if (highest[7] === "confirmed") toggleButton.click();
+                  break;
+              }
+
+              coordinates = [highest[1], highest[0]];
+              ps = highest[2];
+              cr = highest[3];
+              c = highest[4].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+              f = highest[5].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+              r = highest[6].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+              rr =
+                highest[6] === 0 && highest[4] === 0
+                  ? 0
+                  : highest[6] === highest[4] && f > 0
+                  ? Number(
+                      ((highest[6] - highest[5]) / highest[4]) * 100
+                    ).toFixed(2) + "%"
+                  : Number(highest[6] / highest[4]) * 100 === Infinity
+                  ? 0
+                  : isNaN(Number(highest[6] / highest[4]) * 100)
+                  ? 0
+                  : Number((highest[6] / highest[4]) * 100).toFixed(2) + "%";
+
+              fr =
+                highest[5] === 0 && highest[4] === 0
+                  ? 0
+                  : Number(highest[5] / highest[4]) * 100 === Infinity
+                  ? 0
+                  : isNaN(Number(highest[5] / highest[4]) * 100)
+                  ? 0
+                  : Number((highest[5] / highest[4]) * 100).toFixed(2) + "%";
+
+              map.flyTo({ center: coordinates });
+
+              let popup = document.querySelector(".mapboxgl-popup");
+
+              let newPopup = new mapboxgl.Popup()
+                .setLngLat(coordinates)
+                .setHTML(
+                  `<h3 class="popup-header">${ps !== "" ? ps : ""} ${
+                    ps !== "" ? "" : cr
+                  }</h3> <span class="divider"></span> <p class="ps-total"><span class="nix">Total Confirmed Cases</span>${c}</p> <span class="divider"></span> <ul><li class="recovered">Recovered: ${r} / Rate: ${rr}</li><li class="fatal">Fatal: ${f} / Rate: ${fr}</li></ul>`
+                );
+
+              if (popup) {
+                popup.remove();
+                newPopup.addTo(map);
+              } else newPopup.addTo(map);
+
+              state.locationClicked([ps, cr, coordinates]);
+
+              e.stopPropagation();
+            }
 
             function clickMap(e) {
               map.flyTo({ center: e.features[0].geometry.coordinates });
               const coordinates = e.features[0].geometry.coordinates.slice();
               const ps = e.features[0].properties.province_state;
               const cr = e.features[0].properties.country_region;
-              const c = e.features[0].properties.confirmed;
-              const r = e.features[0].properties.recovered;
-              const f = e.features[0].properties.deaths;
+              const c = e.features[0].properties.confirmed
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+              const r = e.features[0].properties.recovered
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+              const f = e.features[0].properties.deaths
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+              let rr =
+                e.features[0].properties.recovered === 0 &&
+                e.features[0].properties.confirmed === 0
+                  ? 0
+                  : e.features[0].properties.recovered ===
+                      e.features[0].properties.confirmed && f > 0
+                  ? Number(
+                      ((e.features[0].properties.recovered -
+                        e.features[0].properties.deaths) /
+                        e.features[0].properties.confirmed) *
+                        100
+                    ).toFixed(2) + "%"
+                  : Number(
+                      e.features[0].properties.recovered /
+                        e.features[0].properties.confirmed
+                    ) *
+                      100 ===
+                    Infinity
+                  ? 0
+                  : isNaN(
+                      Number(
+                        e.features[0].properties.recovered /
+                          e.features[0].properties.confirmed
+                      ) * 100
+                    )
+                  ? 0
+                  : Number(
+                      (e.features[0].properties.recovered /
+                        e.features[0].properties.confirmed) *
+                        100
+                    ).toFixed(2) + "%";
+
+              let fr =
+                e.features[0].properties.deaths === 0 &&
+                e.features[0].properties.confirmed === 0
+                  ? 0
+                  : Number(
+                      e.features[0].properties.deaths /
+                        e.features[0].properties.confirmed
+                    ) *
+                      100 ===
+                    Infinity
+                  ? 0
+                  : isNaN(
+                      Number(
+                        e.features[0].properties.deaths /
+                          e.features[0].properties.confirmed
+                      ) * 100
+                    )
+                  ? 0
+                  : Number(
+                      (e.features[0].properties.deaths /
+                        e.features[0].properties.confirmed) *
+                        100
+                    ).toFixed(2) + "%";
 
               // Ensure that if the map is zoomed out such that multiple
               // copies of the feature are visible, the popup appears
@@ -188,7 +329,7 @@ const MapboxGLMap = ({ state }) => {
                 .setHTML(
                   `<h3>${ps !== "null" ? ps : ""} ${
                     ps !== "null" ? "" : cr
-                  }</h3> <span class="divider"></span> <p class="ps-total"><span class="nix">Total Confirmed Cases</span>${c}</p> <span class="divider"></span> <ul><li class="recovered">Recovered: ${r}</li><li class="fatal">Fatal: ${f}</li></ul>`
+                  }</h3> <span class="divider"></span> <p class="ps-total"><span class="nix">Total Confirmed Cases</span>${c}</p> <span class="divider"></span> <ul><li class="recovered">Recovered: ${r} / Rate: ${rr}</li><li class="fatal">Fatal: ${f} / Rate: ${fr}</li></ul>`
                 );
 
               if (popup) {
@@ -196,7 +337,7 @@ const MapboxGLMap = ({ state }) => {
                 newPopup.addTo(map);
               } else newPopup.addTo(map);
 
-              state.locationClicked([ps, cr]);
+              state.locationClicked([ps, cr, coordinates]);
 
               e.originalEvent.stopPropagation();
             }
@@ -245,35 +386,34 @@ const MapboxGLMap = ({ state }) => {
             map.on("mouseleave", "rec-pointsOver", function() {
               leavePoint();
             });
+
+            const toggleButton = document.getElementById("toggle-id");
+            const layerArr = [
+              "points",
+              "pointsOver",
+              "rec-points",
+              "rec-pointsOver"
+            ];
+            toggleButton.addEventListener("click", function() {
+              state.changeMapView();
+
+              layerArr.forEach(layer => {
+                let visibility = map.getLayoutProperty(layer, "visibility");
+
+                map.setLayoutProperty(
+                  layer,
+                  "visibility",
+                  visibility === "visible" ? "none" : "visible"
+                );
+              });
+            });
           });
       });
     };
 
     if (!map) initializeMap({ setMap, mapContainer });
-  }, [map, state.lat, state.lng, state.zoom]);
-  if (map) {
-    map.setLayoutProperty(
-      "points",
-      "visibility",
-      state.mapview === "confirmed" ? "visible" : "none"
-    );
-    map.setLayoutProperty(
-      "pointsOver",
-      "visibility",
-      state.mapview === "confirmed" ? "visible" : "none"
-    );
+  }, [map, state.lat, state.lng, state.zoom, state.mapview]);
 
-    map.setLayoutProperty(
-      "rec-points",
-      "visibility",
-      state.mapview === "recovered" ? "visible" : "none"
-    );
-    map.setLayoutProperty(
-      "rec-pointsOver",
-      "visibility",
-      state.mapview === "recovered" ? "visible" : "none"
-    );
-  }
   return <div ref={el => (mapContainer.current = el)} style={styles} />;
 };
 

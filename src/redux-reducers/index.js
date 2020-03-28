@@ -15,7 +15,11 @@ import {
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case COUNT_CASES:
-      return { ...state, worldTotal: state.worldTotal + action.payload };
+      return {
+        ...state,
+        worldTotal: state.worldTotal + action.payload[0],
+        worldRecovered: state.worldRecovered + action.payload[1]
+      };
 
     case HIGHEST_RATES:
       return {
@@ -75,14 +79,19 @@ export const reducer = (state = initialState, action) => {
     case CHANGE_MAPVIEW: {
       return {
         ...state,
-        mapview: state.mapview === "confirmed" ? "recovered" : "confirmed"
+        mapview: state.mapview === "confirmed" ? "recovered" : "confirmed",
+        colorkey: state.colorkey === "red-text" ? "green-text" : "red-text"
       };
     }
     case LOCATION_CLICKED:
       return {
         ...state,
         location:
-          action.payload[0] !== "null" ? action.payload[0] : action.payload[1]
+          action.payload[0] !== "" || action.payload[0] === "null"
+            ? action.payload[0]
+            : action.payload[1],
+        lat: action.payload[2][0],
+        lng: action.payload[2][1]
       };
     default:
       return state;
