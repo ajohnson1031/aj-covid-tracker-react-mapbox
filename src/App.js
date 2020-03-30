@@ -44,7 +44,7 @@ function App(state) {
                 rel='noopener noreferrer'
               >
                 <Icon name='coffee' />
-                &nbsp;Kuppa Joe?
+                &nbsp;Cuppa Joe?
               </a>
               <script src='https://commerce.coinbase.com/v1/checkout.js?version=201807'></script>
             </>
