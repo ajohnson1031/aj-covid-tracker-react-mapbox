@@ -77,12 +77,18 @@ export const reducer = (state = initialState, action) => {
       };
     }
     case LOCATION_CLICKED:
+      console.log(action.payload);
       return {
         ...state,
+
         location:
-          action.payload[0] !== "" || action.payload[0] === "null"
-            ? action.payload[0]
-            : action.payload[1],
+          action.payload[0] === ""
+            ? action.payload[1]
+            : action.payload[0] === "null"
+            ? action.payload[1]
+            : action.payload[0] === null
+            ? action.payload[1]
+            : action.payload[0],
         lat: action.payload[2][0],
         lng: action.payload[2][1]
       };
