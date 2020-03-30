@@ -270,15 +270,20 @@ strong {
 }
 @media only screen and (max-width: 600px) {
   .map-container div#sidebar-outer pre#sidebar .stat {
-    font-size: 0.7rem;
+    font-size: 0.725rem;
     padding: 8px;
-    width: calc(50% - 5px);
+    width: calc(50% - 4px);
   }
 }
 .map-container div#sidebar-outer pre#sidebar .no-column {
   flex-direction: row;
   margin-bottom: 0px;
   padding-top: 20px;
+}
+@media only screen and (max-width: 600px) {
+  .map-container div#sidebar-outer pre#sidebar .no-column {
+    padding: 12px;
+  }
 }
 .map-container div#sidebar-outer pre#sidebar .no-margin {
   margin-bottom: 0;
@@ -411,7 +416,7 @@ strong {
 }
 .tweet-container .tweet-item {
   height: auto;
-  padding: 7.5px 0 7.5px 7.5px;
+  padding: 7.5px;
   display: flex;
   margin-bottom: 5px;
   width: 100%;
