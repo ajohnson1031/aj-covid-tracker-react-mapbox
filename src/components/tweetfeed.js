@@ -43,7 +43,7 @@ const NewsFeed = ({ state }) => {
           >
             <div className='tweet-item light'>
               <img
-                src={tweet.user.profile_image_url}
+                src={tweet.user.profile_image_url_https}
                 className='tweet-profile-img'
                 alt={tweet.user.screen_name}
               />
