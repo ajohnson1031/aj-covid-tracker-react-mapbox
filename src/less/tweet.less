@@ -14,7 +14,7 @@
   line-height: 125%;
 }
 
-.article-container {
+.tweet-container {
   height: calc(100vh - 495px);
   width: 100%;
   overflow: hidden;
@@ -27,11 +27,12 @@
     text-decoration: none;
 
     &:hover {
+      color: white;
       text-decoration: underline;
     }
   }
 
-  .no-articles {
+  .no-tweets {
     color: lighten(#fb6e6e, 10%);
     font-size: 1.4rem;
     position: relative;
@@ -40,8 +41,8 @@
     margin: 0 auto;
   }
 
-  .article-item {
-    height: 100px;
+  .tweet-item {
+    height: auto;
     padding: 7.5px 0 7.5px 7.5px;
     display: flex;
     margin-bottom: 5px;
@@ -49,27 +50,50 @@
     border-radius: 4px;
     cursor: pointer;
 
-    .article-img {
-      width: 140px;
-      border-radius: 4px;
-      margin-right: 10px;
+    .tweet-profile-img {
+      height: 48px;
+      width: 48px;
+      min-width: 48px;
+      border-radius: 48px;
+      box-sizing: content-box;
+      padding: 3px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      margin: 3px;
     }
-    .article-text {
+    .tweet-text {
       display: flex;
       flex-direction: column;
-      width: calc(100% - 150px);
       word-wrap: break-word;
 
-      p {
-        width: calc(100% - 10px);
-        height: 59px;
-        font-size: 0.9rem;
-        word-wrap: break-word;
-        white-space: normal;
-        line-height: 125%;
+      .head {
+        display: flex;
+
+        p {
+          width: auto;
+          font-size: 0.9rem;
+          word-wrap: break-word;
+          white-space: normal;
+          line-height: 125%;
+          margin: 5px 0 0 5px;
+        }
+
+        .screen-name {
+          font-weight: normal;
+          color: lighten(@silverchalice, 5%);
+        }
 
         @media only screen and (max-width: 600px) {
           font-size: 0.8rem;
+        }
+      }
+
+      .body {
+        p {
+          font-size: 0.9rem;
+          word-wrap: break-word;
+          white-space: normal;
+          line-height: 125%;
+          margin: 5px 0 0 5px;
         }
       }
 

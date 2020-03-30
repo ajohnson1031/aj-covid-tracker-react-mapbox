@@ -6,8 +6,6 @@ import {
   HIGHEST_RECOVERED,
   SHOW_HIDE,
   GET_MAP_KEY,
-  GET_NEWS_KEY,
-  GET_COINBASE_ID,
   LOCATION_CLICKED,
   CHANGE_MAPVIEW
 } from "../redux-actions";
@@ -54,7 +52,6 @@ export const reducer = (state = initialState, action) => {
       };
 
     case SHOW_HIDE:
-      console.log("hello");
       return {
         ...state,
         buttonInfo:
@@ -72,10 +69,6 @@ export const reducer = (state = initialState, action) => {
       };
     case GET_MAP_KEY:
       return { ...state, mkey: action.payload };
-    case GET_NEWS_KEY:
-      return { ...state, nkey: action.payload };
-    case GET_COINBASE_ID:
-      return { ...state, cbkey: action.payload };
     case CHANGE_MAPVIEW: {
       return {
         ...state,

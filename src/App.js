@@ -1,27 +1,31 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Icon } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import { connect } from "react-redux";
 import MapboxGLMap from "./components/mapbox";
-import NewsFeed from "./components/newsfeed";
+import TweetFeed from "./components/tweetfeed";
 
 import {
   countCases,
   highestRates,
   showHide,
   getMapKey,
-  getNewsKey,
-  getCoinBaseID,
   changeMapView,
   locationClicked,
   addComma
 } from "./redux-actions";
 
 function App(state) {
+  const [coinbaseKey, setCoinbaseKey] = useState(null);
+
   useEffect(() => {
     state.getMapKey();
-    state.getNewsKey();
-    state.getCoinBaseID();
+    axios
+      .get("https://tranquil-wave-62543.herokuapp.com/keys/coinbasekey")
+      .then(res => {
+        setCoinbaseKey(res.data.key);
+      });
   }, []);
   return (
     <div className='App'>
@@ -31,11 +35,11 @@ function App(state) {
           <span id='toggle-id' className={state.mapview}>
             {state.mapview.charAt(0).toUpperCase() + state.mapview.slice(1)}
           </span>
-          {state.cbkey && (
+          {coinbaseKey && (
             <>
               <a
                 className='cb_button'
-                href={`https://commerce.coinbase.com/checkout/${state.cbkey}`}
+                href={`https://commerce.coinbase.com/checkout/${coinbaseKey}`}
                 target='_blank'
                 rel='noopener noreferrer'
               >
@@ -181,21 +185,21 @@ function App(state) {
             </div>
 
             {state.location && (
-              <div className='news-inner-container'>
+              <div className='tweet-inner-container'>
                 <span className='nixwhite stories'>
-                  <strong>Related News Stories from {state.location}</strong>:
+                  <strong>Real Tweets from {state.location}</strong>:
                   <br />
                   <a
                     className='attribution'
-                    href='https://newsapi.org/'
+                    href='https://developer.twitter.com/en/docs/tweets/search/overview'
                     target='_blank'
                     rel='noopener noreferrer'
                   >
-                    powered by NewsAPI.org
+                    powered by Twitter Search
                   </a>
                 </span>
-                <div className='article-container light'>
-                  <NewsFeed state={state} />
+                <div className='tweet-container light'>
+                  <TweetFeed state={state} />
                 </div>
               </div>
             )}
@@ -213,8 +217,6 @@ export default connect(mapStateToProps, {
   highestRates,
   showHide,
   getMapKey,
-  getNewsKey,
-  getCoinBaseID,
   changeMapView,
   locationClicked,
   addComma

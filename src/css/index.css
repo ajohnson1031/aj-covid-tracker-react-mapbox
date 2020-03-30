@@ -232,7 +232,7 @@ strong {
 .map-container div#sidebar-outer pre#sidebar .page-title {
   margin: 0;
 }
-.map-container div#sidebar-outer pre#sidebar .news-inner-container {
+.map-container div#sidebar-outer pre#sidebar .tweet-inner-container {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -384,7 +384,7 @@ strong {
 .stories {
   line-height: 125%;
 }
-.article-container {
+.tweet-container {
   height: calc(100vh - 495px);
   width: 100%;
   overflow: hidden;
@@ -392,14 +392,15 @@ strong {
   padding: 7.5px;
   border-radius: 4px;
 }
-.article-container a {
+.tweet-container a {
   color: white;
   text-decoration: none;
 }
-.article-container a:hover {
+.tweet-container a:hover {
+  color: white;
   text-decoration: underline;
 }
-.article-container .no-articles {
+.tweet-container .no-tweets {
   color: #fca0a0;
   font-size: 1.4rem;
   position: relative;
@@ -407,8 +408,8 @@ strong {
   width: fit-content;
   margin: 0 auto;
 }
-.article-container .article-item {
-  height: 100px;
+.tweet-container .tweet-item {
+  height: auto;
   padding: 7.5px 0 7.5px 7.5px;
   display: flex;
   margin-bottom: 5px;
@@ -416,31 +417,49 @@ strong {
   border-radius: 4px;
   cursor: pointer;
 }
-.article-container .article-item .article-img {
-  width: 140px;
-  border-radius: 4px;
-  margin-right: 10px;
+.tweet-container .tweet-item .tweet-profile-img {
+  height: 48px;
+  width: 48px;
+  min-width: 48px;
+  border-radius: 48px;
+  box-sizing: content-box;
+  padding: 3px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  margin: 3px;
 }
-.article-container .article-item .article-text {
+.tweet-container .tweet-item .tweet-text {
   display: flex;
   flex-direction: column;
-  width: calc(100% - 150px);
   word-wrap: break-word;
 }
-.article-container .article-item .article-text p {
-  width: calc(100% - 10px);
-  height: 59px;
+.tweet-container .tweet-item .tweet-text .head {
+  display: flex;
+}
+.tweet-container .tweet-item .tweet-text .head p {
+  width: auto;
   font-size: 0.9rem;
   word-wrap: break-word;
   white-space: normal;
   line-height: 125%;
+  margin: 5px 0 0 5px;
+}
+.tweet-container .tweet-item .tweet-text .head .screen-name {
+  font-weight: normal;
+  color: #aeaeae;
 }
 @media only screen and (max-width: 600px) {
-  .article-container .article-item .article-text p {
+  .tweet-container .tweet-item .tweet-text .head {
     font-size: 0.8rem;
   }
 }
-.article-container .article-item .article-text .article-footer span {
+.tweet-container .tweet-item .tweet-text .body p {
+  font-size: 0.9rem;
+  word-wrap: break-word;
+  white-space: normal;
+  line-height: 125%;
+  margin: 5px 0 0 5px;
+}
+.tweet-container .tweet-item .tweet-text .article-footer span {
   display: inline-block;
   font-size: 0.8rem;
   font-weight: normal;
@@ -451,10 +470,10 @@ strong {
   width: 48%;
 }
 @media only screen and (max-width: 600px) {
-  .article-container .article-item .article-text .article-footer span {
+  .tweet-container .tweet-item .tweet-text .article-footer span {
     font-size: 0.65rem;
   }
 }
-.article-container .article-item .article-text .article-footer .right {
+.tweet-container .tweet-item .tweet-text .article-footer .right {
   text-align: right;
 }

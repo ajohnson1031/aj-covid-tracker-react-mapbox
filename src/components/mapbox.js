@@ -95,13 +95,13 @@ const MapboxGLMap = ({ state }) => {
                   ["linear"],
                   ["zoom"],
                   2,
-                  ["*", 0.0015, ["number", ["get", "confirmed"]]],
+                  ["*", 0.001, ["number", ["get", "confirmed"]]],
                   3,
-                  ["*", 0.003, ["number", ["get", "confirmed"]]],
+                  ["*", 0.002, ["number", ["get", "confirmed"]]],
                   4,
-                  ["*", 0.005, ["number", ["get", "confirmed"]]],
+                  ["*", 0.003, ["number", ["get", "confirmed"]]],
                   5,
-                  ["*", 0.005, ["number", ["get", "confirmed"]]]
+                  ["*", 0.004, ["number", ["get", "confirmed"]]]
                 ]
               }
             });
@@ -137,13 +137,13 @@ const MapboxGLMap = ({ state }) => {
                   ["linear"],
                   ["zoom"],
                   2,
-                  ["*", 0.0015, ["number", ["get", "recovered"]]],
+                  ["*", 0.001, ["number", ["get", "recovered"]]],
                   3,
-                  ["*", 0.003, ["number", ["get", "recovered"]]],
+                  ["*", 0.002, ["number", ["get", "recovered"]]],
                   4,
-                  ["*", 0.005, ["number", ["get", "recovered"]]],
+                  ["*", 0.003, ["number", ["get", "recovered"]]],
                   5,
-                  ["*", 0.005, ["number", ["get", "recovered"]]]
+                  ["*", 0.004, ["number", ["get", "recovered"]]]
                 ]
               }
             });
@@ -173,7 +173,7 @@ const MapboxGLMap = ({ state }) => {
             );
 
             function highClick(e) {
-              let highest, coordinates, ps, cr, c, r, f, m, rr, fr;
+              let highest, coordinates, ps, cr, c, r, f, rr, fr;
               switch (e.currentTarget) {
                 case hdc:
                   highest = document.getElementById("hdci").value.split(",");
@@ -190,6 +190,8 @@ const MapboxGLMap = ({ state }) => {
                 case hrr:
                   highest = document.getElementById("hrri").value.split(",");
                   if (highest[7] === "confirmed") toggleButton.click();
+                  break;
+                default:
                   break;
               }
 

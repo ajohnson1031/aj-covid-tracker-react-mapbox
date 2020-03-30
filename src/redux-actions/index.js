@@ -6,8 +6,6 @@ export const HIGHEST_DEATHS = "HIGHEST_DEATHS";
 export const HIGHEST_RECOVERED = "HIGHEST_RECOVERED";
 export const SHOW_HIDE = "SHOW_HIDE";
 export const GET_MAP_KEY = "GET_MAP_KEY";
-export const GET_NEWS_KEY = "GET_NEWS_KEY";
-export const GET_COINBASE_ID = "GET_COINBASE_ID";
 export const CHANGE_MAPVIEW = "CHANGE_MAPVIEW";
 export const LOCATION_CLICKED = "LOCATION_CLICKED";
 
@@ -96,36 +94,12 @@ export const showHide = () => dispatch => {
   dispatch({ type: SHOW_HIDE });
 };
 
-export const getCoinBaseID = () => dispatch => {
-  try {
-    axios
-      .get("https://tranquil-wave-62543.herokuapp.com/keys/coinbasekey")
-      .then(res => {
-        dispatch({ type: GET_COINBASE_ID, payload: res.data.key });
-      });
-  } catch (error) {
-    console.log("Error: ", error);
-  }
-};
-
 export const getMapKey = () => dispatch => {
   try {
     axios
       .get("https://tranquil-wave-62543.herokuapp.com/keys/mapkey")
       .then(res => {
         dispatch({ type: GET_MAP_KEY, payload: res.data.key });
-      });
-  } catch (error) {
-    console.log("Error: ", error);
-  }
-};
-
-export const getNewsKey = () => dispatch => {
-  try {
-    axios
-      .get("https://tranquil-wave-62543.herokuapp.com/keys/newskey")
-      .then(res => {
-        dispatch({ type: GET_NEWS_KEY, payload: res.data.key });
       });
   } catch (error) {
     console.log("Error: ", error);
