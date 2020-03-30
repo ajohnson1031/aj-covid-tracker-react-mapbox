@@ -431,9 +431,11 @@ strong {
   display: flex;
   flex-direction: column;
   word-wrap: break-word;
+  padding-bottom: 5px;
 }
 .tweet-container .tweet-item .tweet-text .head {
   display: flex;
+  margin-bottom: 5px;
 }
 .tweet-container .tweet-item .tweet-text .head p {
   width: auto;
@@ -443,14 +445,14 @@ strong {
   line-height: 125%;
   margin: 5px 0 0 5px;
 }
+@media only screen and (max-width: 600px) {
+  .tweet-container .tweet-item .tweet-text .head p {
+    font-size: 0.8rem;
+  }
+}
 .tweet-container .tweet-item .tweet-text .head .screen-name {
   font-weight: normal;
   color: #aeaeae;
-}
-@media only screen and (max-width: 600px) {
-  .tweet-container .tweet-item .tweet-text .head {
-    font-size: 0.8rem;
-  }
 }
 .tweet-container .tweet-item .tweet-text .body p {
   font-size: 0.9rem;

@@ -64,10 +64,11 @@
       display: flex;
       flex-direction: column;
       word-wrap: break-word;
+      padding-bottom: 5px;
 
       .head {
         display: flex;
-
+        margin-bottom: 5px;
         p {
           width: auto;
           font-size: 0.9rem;
@@ -75,15 +76,15 @@
           white-space: normal;
           line-height: 125%;
           margin: 5px 0 0 5px;
+
+          @media only screen and (max-width: 600px) {
+            font-size: 0.8rem;
+          }
         }
 
         .screen-name {
           font-weight: normal;
           color: lighten(@silverchalice, 5%);
-        }
-
-        @media only screen and (max-width: 600px) {
-          font-size: 0.8rem;
         }
       }
 
