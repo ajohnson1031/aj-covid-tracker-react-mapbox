@@ -141,6 +141,7 @@ strong {
   z-index: 30;
   width: 450px;
   font-size: 0.7rem;
+  height: 60px;
 }
 .map-container .shbutton .confirmed {
   background-color: rgba(251, 110, 110, 0.6);
@@ -187,7 +188,7 @@ strong {
 }
 .map-container div#sidebar-outer {
   position: absolute;
-  top: 61px;
+  top: 60px;
   left: 0;
   height: calc(100vh - 60px);
   width: 100%;
