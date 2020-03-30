@@ -77,7 +77,6 @@ export const reducer = (state = initialState, action) => {
       };
     }
     case LOCATION_CLICKED:
-      console.log(action.payload);
       return {
         ...state,
 
