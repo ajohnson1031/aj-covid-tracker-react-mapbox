@@ -480,3 +480,8 @@ strong {
 .tweet-container .tweet-item .tweet-text .article-footer .right {
   text-align: right;
 }
+@media only screen and (max-width: 600px) {
+  .tweet-container {
+    height: calc(100vh - 475px);
+  }
+}
