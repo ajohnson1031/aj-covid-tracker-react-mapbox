@@ -413,7 +413,7 @@ strong {
   padding: 7.5px 0 7.5px 7.5px;
   display: flex;
   margin-bottom: 5px;
-  width: 98.5%;
+  width: 100%;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -444,11 +444,6 @@ strong {
   white-space: normal;
   line-height: 125%;
   margin: 5px 0 0 5px;
-}
-@media only screen and (max-width: 600px) {
-  .tweet-container .tweet-item .tweet-text .head p {
-    font-size: 0.8rem;
-  }
 }
 .tweet-container .tweet-item .tweet-text .head .screen-name {
   font-weight: normal;
