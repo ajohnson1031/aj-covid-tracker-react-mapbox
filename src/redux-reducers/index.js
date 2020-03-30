@@ -63,7 +63,7 @@ export const reducer = (state = initialState, action) => {
               }
             : {
                 text: "[HIDE]",
-                styleA: { background: "rgba(61, 61, 61, 0.5)" },
+                styleA: { background: "rgba(15, 15, 25, 0.7)" },
                 styleB: { display: "flex" }
               }
       };
