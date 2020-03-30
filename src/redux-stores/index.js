@@ -49,7 +49,7 @@ const initialState = {
   },
   buttonInfo: {
     text: "[HIDE]",
-    styleA: { background: "rgba(25,25,25,0.5)" },
+    styleA: { background: "rgba(15,15,25,0.7)" },
     styleB: { display: "flex" }
   },
   mkey: null,
