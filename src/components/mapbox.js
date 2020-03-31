@@ -95,13 +95,13 @@ const MapboxGLMap = ({ state }) => {
                   ["linear"],
                   ["zoom"],
                   2,
-                  ["*", 0.001, ["number", ["get", "confirmed"]]],
+                  ["*", 0.0005, ["number", ["get", "confirmed"]]],
                   3,
-                  ["*", 0.002, ["number", ["get", "confirmed"]]],
+                  ["*", 0.001, ["number", ["get", "confirmed"]]],
                   4,
-                  ["*", 0.003, ["number", ["get", "confirmed"]]],
+                  ["*", 0.0015, ["number", ["get", "confirmed"]]],
                   5,
-                  ["*", 0.004, ["number", ["get", "confirmed"]]]
+                  ["*", 0.002, ["number", ["get", "confirmed"]]]
                 ]
               }
             });
@@ -137,13 +137,13 @@ const MapboxGLMap = ({ state }) => {
                   ["linear"],
                   ["zoom"],
                   2,
-                  ["*", 0.001, ["number", ["get", "recovered"]]],
+                  ["*", 0.0005, ["number", ["get", "recovered"]]],
                   3,
-                  ["*", 0.002, ["number", ["get", "recovered"]]],
+                  ["*", 0.001, ["number", ["get", "recovered"]]],
                   4,
-                  ["*", 0.003, ["number", ["get", "recovered"]]],
+                  ["*", 0.001, ["number", ["get", "recovered"]]],
                   5,
-                  ["*", 0.004, ["number", ["get", "recovered"]]]
+                  ["*", 0.002, ["number", ["get", "recovered"]]]
                 ]
               }
             });

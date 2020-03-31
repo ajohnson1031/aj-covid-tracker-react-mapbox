@@ -58,7 +58,9 @@ function App(state) {
               <span className='divider'></span>
               <span className='nixwhite'>{`Total ${state.mapview
                 .charAt(0)
-                .toUpperCase() + state.mapview.slice(1)} Cases:`}</span>
+                .toUpperCase() + state.mapview.slice(1)} Cases ${
+                state.displayLocation
+              }:`}</span>
               <p className={`worldTotal ${state.colorkey}`}>
                 {state.mapview === "confirmed" && state.worldTotal !== 0
                   ? addComma(state.worldTotal)

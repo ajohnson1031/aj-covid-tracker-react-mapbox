@@ -437,7 +437,7 @@ strong {
   display: flex;
   flex-direction: column;
   word-wrap: break-word;
-  padding-bottom: 5px;
+  padding: 0 5px 5px;
 }
 .tweet-container .tweet-item .tweet-text .head {
   display: flex;

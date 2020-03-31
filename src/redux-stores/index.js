@@ -54,7 +54,8 @@ const initialState = {
   },
   mkey: null,
   mapview: "confirmed",
-  location: "New York"
+  location: "New York",
+  displayLocation: "Worldwide"
 };
 
 export default initialState;
