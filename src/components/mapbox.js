@@ -36,23 +36,25 @@ const MapboxGLMap = ({ state }) => {
           )
           .then(res => {
             res.data.features.map(_ => {
-              feats.push({
-                id: _.attributes.OBJECTID,
-                type: "Feature",
-                properties: {
-                  lat: _.attributes.Lat,
-                  long: _.attributes.Long_,
-                  province_state: _.attributes.Province_State,
-                  country_region: _.attributes.Country_Region,
-                  confirmed: _.attributes.Confirmed,
-                  recovered: _.attributes.Recovered,
-                  deaths: _.attributes.Deaths
-                },
-                geometry: {
-                  coordinates: [_.geometry.x, _.geometry.y],
-                  type: "Point"
-                }
-              });
+              if (_.geometry) {
+                feats.push({
+                  id: _.attributes.OBJECTID,
+                  type: "Feature",
+                  properties: {
+                    lat: _.attributes.Lat,
+                    long: _.attributes.Long_,
+                    province_state: _.attributes.Province_State,
+                    country_region: _.attributes.Country_Region,
+                    confirmed: _.attributes.Confirmed,
+                    recovered: _.attributes.Recovered,
+                    deaths: _.attributes.Deaths
+                  },
+                  geometry: {
+                    coordinates: [_.geometry.x, _.geometry.y],
+                    type: "Point"
+                  }
+                });
+              }
 
               state.countCases([
                 _.attributes.Confirmed,
@@ -71,6 +73,7 @@ const MapboxGLMap = ({ state }) => {
           })
           .catch(err => console.log(err))
           .finally(_ => {
+            feats.length > 0 ? console.log(feats) : console.log("hello");
             map.addSource("infected", {
               type: "geojson",
               data: {

@@ -111,5 +111,5 @@ export const changeMapView = () => dispatch => {
 };
 
 export const addComma = str => {
-  return str.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return str.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
 };
