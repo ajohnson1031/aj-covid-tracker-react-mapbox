@@ -6,7 +6,7 @@ import axios from "axios";
 const styles = {
   width: "100%",
   height: "100%",
-  position: "absolute"
+  position: "absolute",
 };
 
 const MapboxGLMap = ({ state }) => {
@@ -21,7 +21,7 @@ const MapboxGLMap = ({ state }) => {
         container: mapContainer.current,
         style: "mapbox://styles/ajohnson1031/ck84r3wfc05wa1ipbebi8dh51", // stylesheet location
         center: [state.lat, state.lng],
-        zoom: state.zoom
+        zoom: state.zoom,
       });
 
       map.on("load", () => {
@@ -34,8 +34,8 @@ const MapboxGLMap = ({ state }) => {
           .get(
             "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/1/query?where=1%3D1&outFields=*&outSR=4326&f=json"
           )
-          .then(res => {
-            res.data.features.map(_ => {
+          .then((res) => {
+            res.data.features.map((_) => {
               if (_.geometry) {
                 feats.push({
                   id: _.attributes.OBJECTID,
@@ -47,18 +47,18 @@ const MapboxGLMap = ({ state }) => {
                     country_region: _.attributes.Country_Region,
                     confirmed: _.attributes.Confirmed,
                     recovered: _.attributes.Recovered,
-                    deaths: _.attributes.Deaths
+                    deaths: _.attributes.Deaths,
                   },
                   geometry: {
                     coordinates: [_.geometry.x, _.geometry.y],
-                    type: "Point"
-                  }
+                    type: "Point",
+                  },
                 });
               }
 
               state.countCases([
                 _.attributes.Confirmed,
-                _.attributes.Recovered
+                _.attributes.Recovered,
               ]);
               state.highestRates([
                 _.attributes.Province_State,
@@ -67,19 +67,18 @@ const MapboxGLMap = ({ state }) => {
                 _.attributes.Deaths,
                 _.attributes.Recovered,
                 _.attributes.Lat,
-                _.attributes.Long_
+                _.attributes.Long_,
               ]);
             });
           })
-          .catch(err => console.log(err))
-          .finally(_ => {
-            feats.length > 0 ? console.log(feats) : console.log("hello");
+          .catch((err) => console.log(err))
+          .finally((_) => {
             map.addSource("infected", {
               type: "geojson",
               data: {
                 type: "FeatureCollection",
-                features: feats
-              }
+                features: feats,
+              },
             });
 
             map.addLayer({
@@ -98,15 +97,15 @@ const MapboxGLMap = ({ state }) => {
                   ["linear"],
                   ["zoom"],
                   2,
-                  ["*", 0.0005, ["number", ["get", "confirmed"]]],
+                  ["*", 0.00025, ["number", ["get", "confirmed"]]],
                   3,
-                  ["*", 0.001, ["number", ["get", "confirmed"]]],
+                  ["*", 0.00025, ["number", ["get", "confirmed"]]],
                   4,
-                  ["*", 0.0015, ["number", ["get", "confirmed"]]],
+                  ["*", 0.00035, ["number", ["get", "confirmed"]]],
                   5,
-                  ["*", 0.002, ["number", ["get", "confirmed"]]]
-                ]
-              }
+                  ["*", 0.00035, ["number", ["get", "confirmed"]]],
+                ],
+              },
             });
 
             map.addLayer({
@@ -120,8 +119,8 @@ const MapboxGLMap = ({ state }) => {
                 "circle-stroke-width": 2,
                 "circle-stroke-color": "#FB6E6E",
                 "circle-stroke-opacity": 0.2,
-                "circle-radius": 10
-              }
+                "circle-radius": 10,
+              },
             });
 
             map.addLayer({
@@ -140,15 +139,15 @@ const MapboxGLMap = ({ state }) => {
                   ["linear"],
                   ["zoom"],
                   2,
-                  ["*", 0.0005, ["number", ["get", "recovered"]]],
+                  ["*", 0.00025, ["number", ["get", "recovered"]]],
                   3,
-                  ["*", 0.001, ["number", ["get", "recovered"]]],
+                  ["*", 0.00025, ["number", ["get", "recovered"]]],
                   4,
-                  ["*", 0.001, ["number", ["get", "recovered"]]],
+                  ["*", 0.00035, ["number", ["get", "recovered"]]],
                   5,
-                  ["*", 0.002, ["number", ["get", "recovered"]]]
-                ]
-              }
+                  ["*", 0.00035, ["number", ["get", "recovered"]]],
+                ],
+              },
             });
 
             map.addLayer({
@@ -162,8 +161,8 @@ const MapboxGLMap = ({ state }) => {
                 "circle-stroke-width": 2,
                 "circle-stroke-color": "#00E600",
                 "circle-stroke-opacity": 0.2,
-                "circle-radius": 10
-              }
+                "circle-radius": 10,
+              },
             });
 
             const hdc = document.getElementById("hdc");
@@ -171,7 +170,7 @@ const MapboxGLMap = ({ state }) => {
             const hrc = document.getElementById("hrc");
             const hrr = document.getElementById("hrr");
 
-            [hdc, hdr, hrc, hrr].map(elem =>
+            [hdc, hdr, hrc, hrr].map((elem) =>
               elem.addEventListener("click", highClick)
             );
 
@@ -360,35 +359,35 @@ const MapboxGLMap = ({ state }) => {
             map.on("click", "rec-points", clickMap);
             map.on("click", "rec-pointsOver", clickMap);
 
-            map.on("mouseenter", "points", function() {
+            map.on("mouseenter", "points", function () {
               enterPoint();
             });
 
-            map.on("mouseleave", "points", function() {
+            map.on("mouseleave", "points", function () {
               leavePoint();
             });
 
-            map.on("mouseenter", "pointsOver", function() {
+            map.on("mouseenter", "pointsOver", function () {
               enterPoint();
             });
 
-            map.on("mouseleave", "pointsOver", function() {
+            map.on("mouseleave", "pointsOver", function () {
               leavePoint();
             });
 
-            map.on("mouseenter", "rec-points", function() {
+            map.on("mouseenter", "rec-points", function () {
               enterPoint();
             });
 
-            map.on("mouseleave", "rec-points", function() {
+            map.on("mouseleave", "rec-points", function () {
               leavePoint();
             });
 
-            map.on("mouseenter", "rec-pointsOver", function() {
+            map.on("mouseenter", "rec-pointsOver", function () {
               enterPoint();
             });
 
-            map.on("mouseleave", "rec-pointsOver", function() {
+            map.on("mouseleave", "rec-pointsOver", function () {
               leavePoint();
             });
 
@@ -397,12 +396,12 @@ const MapboxGLMap = ({ state }) => {
               "points",
               "pointsOver",
               "rec-points",
-              "rec-pointsOver"
+              "rec-pointsOver",
             ];
-            toggleButton.addEventListener("click", function() {
+            toggleButton.addEventListener("click", function () {
               state.changeMapView();
 
-              layerArr.forEach(layer => {
+              layerArr.forEach((layer) => {
                 let visibility = map.getLayoutProperty(layer, "visibility");
 
                 map.setLayoutProperty(
@@ -419,7 +418,7 @@ const MapboxGLMap = ({ state }) => {
     if (!map) initializeMap({ setMap, mapContainer });
   }, [map, state.lat, state.lng, state.zoom, state.mapview]);
 
-  return <div ref={el => (mapContainer.current = el)} style={styles} />;
+  return <div ref={(el) => (mapContainer.current = el)} style={styles} />;
 };
 
 export default MapboxGLMap;
