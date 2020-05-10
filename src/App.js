@@ -13,7 +13,7 @@ import {
   getMapKey,
   changeMapView,
   locationClicked,
-  addComma
+  addComma,
 } from "./redux-actions";
 
 function App(state) {
@@ -23,7 +23,7 @@ function App(state) {
     state.getMapKey();
     axios
       .get("https://tranquil-wave-62543.herokuapp.com/keys/coinbasekey")
-      .then(res => {
+      .then((res) => {
         setCoinbaseKey(res.data.key);
       });
   }, []);
@@ -56,11 +56,9 @@ function App(state) {
             <div className='sidebar-inner-container'>
               <p className='page-title'>World Corona Virus Map</p>{" "}
               <span className='divider'></span>
-              <span className='nixwhite'>{`Total ${state.mapview
-                .charAt(0)
-                .toUpperCase() + state.mapview.slice(1)} Cases ${
-                state.displayLocation
-              }:`}</span>
+              <span className='nixwhite'>{`Total ${
+                state.mapview.charAt(0).toUpperCase() + state.mapview.slice(1)
+              } Cases ${state.displayLocation}:`}</span>
               <p className={`worldTotal ${state.colorkey}`}>
                 {state.mapview === "confirmed" && state.worldTotal !== 0
                   ? addComma(state.worldTotal)
@@ -76,8 +74,13 @@ function App(state) {
               <p id='hdc' className='stat'>
                 Highest Fatality Count: <br />
                 <span className='stat-entry'>
-                  {state.highestDeathTotal.Province_State !== null
+                  {state.highestDeathTotal.Province_State === "Diamond Princess"
+                    ? "Diam. Princess, "
+                    : state.highestDeathTotal.Province_State !== null
                     ? `${state.highestDeathTotal.Province_State}, `
+                    : state.highestDeathTotal.Country_Region ===
+                      "United Kingdom"
+                    ? "UK, "
                     : `${state.highestDeathTotal.Country_Region}, `}
                   <span className='red-text'>
                     {state.highestDeathTotal.DeathTotal !== 0
@@ -96,7 +99,7 @@ function App(state) {
                     state.highestDeathTotal.Confirmed,
                     state.highestDeathTotal.Deaths,
                     state.highestDeathTotal.Recovered,
-                    state.mapview
+                    state.mapview,
                   ]}
                 />
               </p>
@@ -104,8 +107,15 @@ function App(state) {
               <p id='hdr' className='stat'>
                 Highest Fatality Rate: <br />
                 <span className='stat-entry'>
-                  {state.highestDeathRate.Province_State !== null
+                  {state.highestDeathRate.Province_State === "Diamond Princess"
+                    ? "Diam. Princess, "
+                    : state.highestDeathRate.Province_State !== null
                     ? `${state.highestDeathRate.Province_State}, `
+                    : state.highestDeathRate.Country_Region ===
+                      "Diamond Princess"
+                    ? "Diam. Princess, "
+                    : state.highestDeathRate.Country_Region === "United Kingdom"
+                    ? "UK, "
                     : `${state.highestDeathRate.Country_Region}, `}
                   <span className='red-text'>
                     {state.highestDeathRate.DeathRate !== 0
@@ -124,7 +134,7 @@ function App(state) {
                     state.highestDeathRate.Confirmed,
                     state.highestDeathRate.Deaths,
                     state.highestDeathRate.Recovered,
-                    state.mapview
+                    state.mapview,
                   ]}
                 />
               </p>
@@ -152,7 +162,7 @@ function App(state) {
                     state.highestRecoveredTotal.Confirmed,
                     state.highestRecoveredTotal.Deaths,
                     state.highestRecoveredTotal.Recovered,
-                    state.mapview
+                    state.mapview,
                   ]}
                 />
               </p>
@@ -180,7 +190,7 @@ function App(state) {
                     state.highestRecoveredRate.Confirmed,
                     state.highestRecoveredRate.Deaths,
                     state.highestRecoveredRate.Recovered,
-                    state.mapview
+                    state.mapview,
                   ]}
                 />
               </p>
@@ -212,7 +222,7 @@ function App(state) {
     </div>
   );
 }
-const mapStateToProps = state => state;
+const mapStateToProps = (state) => state;
 
 export default connect(mapStateToProps, {
   countCases,
@@ -221,5 +231,5 @@ export default connect(mapStateToProps, {
   getMapKey,
   changeMapView,
   locationClicked,
-  addComma
+  addComma,
 })(App);
