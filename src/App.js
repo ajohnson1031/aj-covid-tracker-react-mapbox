@@ -75,7 +75,7 @@ function App(state) {
                 Highest Fatality Count: <br />
                 <span className='stat-entry'>
                   {state.highestDeathTotal.Province_State === "Diamond Princess"
-                    ? "Diam. Princess, "
+                    ? "D. Princess, "
                     : state.highestDeathTotal.Province_State !== null
                     ? `${state.highestDeathTotal.Province_State}, `
                     : state.highestDeathTotal.Country_Region ===
@@ -108,12 +108,12 @@ function App(state) {
                 Highest Fatality Rate: <br />
                 <span className='stat-entry'>
                   {state.highestDeathRate.Province_State === "Diamond Princess"
-                    ? "Diam. Princess, "
+                    ? "D. Princess, "
                     : state.highestDeathRate.Province_State !== null
                     ? `${state.highestDeathRate.Province_State}, `
                     : state.highestDeathRate.Country_Region ===
                       "Diamond Princess"
-                    ? "Diam. Princess, "
+                    ? "D. Princess, "
                     : state.highestDeathRate.Country_Region === "United Kingdom"
                     ? "UK, "
                     : `${state.highestDeathRate.Country_Region}, `}
