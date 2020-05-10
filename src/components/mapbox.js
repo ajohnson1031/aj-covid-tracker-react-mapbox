@@ -36,7 +36,7 @@ const MapboxGLMap = ({ state }) => {
           )
           .then((res) => {
             res.data.features.map((_) => {
-              if (_.geometry) {
+              if (_.geometry && _.attributes.Province_State !== "Recovered") {
                 feats.push({
                   id: _.attributes.OBJECTID,
                   type: "Feature",
@@ -56,19 +56,22 @@ const MapboxGLMap = ({ state }) => {
                 });
               }
 
-              state.countCases([
-                _.attributes.Confirmed,
-                _.attributes.Recovered,
-              ]);
-              state.highestRates([
-                _.attributes.Province_State,
-                _.attributes.Country_Region,
-                _.attributes.Confirmed,
-                _.attributes.Deaths,
-                _.attributes.Recovered,
-                _.attributes.Lat,
-                _.attributes.Long_,
-              ]);
+              if (_.attributes.Province_State !== "Recovered")
+                state.countCases([
+                  _.attributes.Confirmed,
+                  _.attributes.Recovered,
+                ]);
+
+              if (_.attributes.Province_State !== "Recovered")
+                state.highestRates([
+                  _.attributes.Province_State,
+                  _.attributes.Country_Region,
+                  _.attributes.Confirmed,
+                  _.attributes.Deaths,
+                  _.attributes.Recovered,
+                  _.attributes.Lat,
+                  _.attributes.Long_,
+                ]);
             });
           })
           .catch((err) => console.log(err))
@@ -97,13 +100,13 @@ const MapboxGLMap = ({ state }) => {
                   ["linear"],
                   ["zoom"],
                   2,
-                  ["*", 0.00025, ["number", ["get", "confirmed"]]],
+                  ["*", 0.00015, ["number", ["get", "confirmed"]]],
                   3,
-                  ["*", 0.00025, ["number", ["get", "confirmed"]]],
+                  ["*", 0.00015, ["number", ["get", "confirmed"]]],
                   4,
-                  ["*", 0.00035, ["number", ["get", "confirmed"]]],
+                  ["*", 0.0002, ["number", ["get", "confirmed"]]],
                   5,
-                  ["*", 0.00035, ["number", ["get", "confirmed"]]],
+                  ["*", 0.0002, ["number", ["get", "confirmed"]]],
                 ],
               },
             });
@@ -139,13 +142,13 @@ const MapboxGLMap = ({ state }) => {
                   ["linear"],
                   ["zoom"],
                   2,
-                  ["*", 0.00025, ["number", ["get", "recovered"]]],
+                  ["*", 0.00015, ["number", ["get", "recovered"]]],
                   3,
-                  ["*", 0.00025, ["number", ["get", "recovered"]]],
+                  ["*", 0.00015, ["number", ["get", "recovered"]]],
                   4,
-                  ["*", 0.00035, ["number", ["get", "recovered"]]],
+                  ["*", 0.0002, ["number", ["get", "recovered"]]],
                   5,
-                  ["*", 0.00035, ["number", ["get", "recovered"]]],
+                  ["*", 0.0002, ["number", ["get", "recovered"]]],
                 ],
               },
             });

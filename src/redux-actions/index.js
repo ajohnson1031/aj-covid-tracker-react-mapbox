@@ -9,15 +9,15 @@ export const GET_MAP_KEY = "GET_MAP_KEY";
 export const CHANGE_MAPVIEW = "CHANGE_MAPVIEW";
 export const LOCATION_CLICKED = "LOCATION_CLICKED";
 
-export const locationClicked = location => dispatch => {
+export const locationClicked = (location) => (dispatch) => {
   dispatch({ type: LOCATION_CLICKED, payload: location });
 };
 
-export const countCases = cases => dispatch => {
+export const countCases = (cases) => (dispatch) => {
   dispatch({ type: COUNT_CASES, payload: cases });
 };
 
-export const highestRates = highest => dispatch => {
+export const highestRates = (highest) => (dispatch) => {
   const Province_State = highest[0];
   const Country_Region = highest[1];
   const Confirmed = highest[2];
@@ -57,8 +57,8 @@ export const highestRates = highest => dispatch => {
       Long: Long,
       Confirmed: Number(Confirmed),
       Deaths: Number(Deaths),
-      Recovered: Recovered
-    }
+      Recovered: Recovered,
+    },
   });
 
   dispatch({
@@ -71,8 +71,8 @@ export const highestRates = highest => dispatch => {
       Long: Long,
       Confirmed: Number(Confirmed),
       Deaths: Number(Deaths),
-      Recovered: Recovered
-    }
+      Recovered: Recovered,
+    },
   });
 
   dispatch({
@@ -85,20 +85,20 @@ export const highestRates = highest => dispatch => {
       Long: Long,
       Confirmed: Number(Confirmed),
       Deaths: Number(Deaths),
-      Recovered: Recovered
-    }
+      Recovered: Recovered,
+    },
   });
 };
 
-export const showHide = () => dispatch => {
+export const showHide = () => (dispatch) => {
   dispatch({ type: SHOW_HIDE });
 };
 
-export const getMapKey = () => dispatch => {
+export const getMapKey = () => (dispatch) => {
   try {
     axios
       .get("https://tranquil-wave-62543.herokuapp.com/keys/mapkey")
-      .then(res => {
+      .then((res) => {
         dispatch({ type: GET_MAP_KEY, payload: res.data.key });
       });
   } catch (error) {
@@ -106,10 +106,10 @@ export const getMapKey = () => dispatch => {
   }
 };
 
-export const changeMapView = () => dispatch => {
+export const changeMapView = () => (dispatch) => {
   dispatch({ type: CHANGE_MAPVIEW });
 };
 
-export const addComma = str => {
+export const addComma = (str) => {
   return str.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
 };
