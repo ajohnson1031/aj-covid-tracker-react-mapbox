@@ -142,7 +142,7 @@ function App(state) {
               <p id='hrc' className='stat no-margin'>
                 Highest Recov. Count: <br />
                 <span className='stat-entry'>
-                  {state.highestDeathRate.Province_State === "Maharashtra"
+                  {state.highestRecoveredTotal.Province_State === "Maharashtra"
                     ? "Mahara..."
                     : state.highestRecoveredTotal.Province_State !== null
                     ? `${state.highestRecoveredTotal.Province_State}, `
