@@ -1,4 +1,4 @@
-# World Coronavirus Map
+# World Coronavirus Map Frontend
 
 This map tracks the latest infection counts and rates as supplied by the ArcGIS database. It also provides death counts and rates per selected state or country as well as real-time tweets from individuals in the affected areas that are accessed via Twitter's Statuses API.
 
