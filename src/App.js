@@ -143,7 +143,7 @@ function App(state) {
                 Highest Recov. Count: <br />
                 <span className='stat-entry'>
                   {state.highestDeathRate.Province_State === "Maharashtra"
-                    ? "Mahar..., "
+                    ? "Mahara..."
                     : state.highestRecoveredTotal.Province_State !== null
                     ? `${state.highestRecoveredTotal.Province_State}, `
                     : `${state.highestRecoveredTotal.Country_Region}, `}
