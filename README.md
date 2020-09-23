@@ -1,70 +1,53 @@
 # World Coronavirus Map
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This map tracks the latest infection counts and rates as supplied by the ArcGIS database. It also provides death counts and rates per selected state or country as well as real-time tweets from individuals in the affected areas that are accessed via Twitter's Statuses API.
 
-## Available Scripts
+## Motivation
 
-In the project directory, you can run:
+With misinformation surrounding the current pandemic at an all-time high, I wanted to be able to receive the most accurate information possible as supplied by reliable sources. The purpose of this app is the dissemination of truthful coronavirus reports by comparing statistical data with independently supplied information from on-the ground observations made by real people via Tweets.
 
-### `yarn start`
+## Build Status
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f35f8c80-71be-4ade-98b8-eee8563503dd/deploy-status)](https://app.netlify.com/sites/aj-coronavirus-tracker-tool/deploys)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Code Style
 
-### `yarn test`
+<img src="https://img.shields.io/badge/react%20component%20style-functional%20w%2Fhooks-brightgreen" alt="react component style - functional with hooks">
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Screenshots
 
-### `yarn build`
+<img src="https://raw.githubusercontent.com/ajohnson1031/aj-covid-tracker-react-mapbox/master/src/imgs/screenshot.jpg" alt="world coronavirus map screenshot" style="border: 1px solid #ccc; padding: 10px;">
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Tech/Framework Used
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- Front End: React.js
+- State Management: Redux.js
+- Data Retrieval: ArcGIS API
+- Selective User Tweets: Twitter Statuses API
+- Data Map Visualizations: Mapbox.js API
+- Donation Capability: Coinbase Commerce API
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Site Build & Backend Deployment
 
-### `yarn eject`
+Current continuous build is managed by <a href="https://aj-coronavirus-tracker-tool.netlify.app/" target="_blank"><strong>Netlify</strong></a> and maintained using Netlify CLI. <a href="https://github.com/ajohnson1031/ajohnson1031-aj-covid-tracker-react-mapbox-be" target="_blank"><strong>Backend</strong></a> and environment variables are configured on a <strong>Heroku</strong> server instance.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Features
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Users are able to toggle between infection/recovery data and visualizations via a switch supplied in the custom dashboard. Users may also choose to hide the dashboard to view the map unobstructed. Tweets are pulled from a preset area centered around the selected area and update with each click. Clicked hotspots bring up a modal displaying the selected area's statistics.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Installation
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Fork and clone this repository and run `yarn` to install required dependencies. You will also need to fork and clone the <a href="https://github.com/ajohnson1031/ajohnson1031-aj-covid-tracker-react-mapbox-be" target="_blank"><strong>Backend</strong></a> repo and host it at your preferred provider. Heroku is recommended for ease of implementation.
 
-## Learn More
+There are several APIs you will need to create KEYS for.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- <a href="https://docs.mapbox.com/mapbox.js/api/v3.3.1/" target="_blank" style="font-weight: bold; color: orange !important;">Mapbox.js API</a> for map drawing.
+- <a href="https://coronavirus-disasterresponse.hub.arcgis.com/" target="_blank" style="font-weight: bold; color: orange !important;">ArcGIS</a> for coronavirus data.
+- <a href="https://developer.twitter.com/en/docs/twitter-api/v1/tweets/search/api-reference/get-search-tweets" target="_blank" style="font-weight: bold; color: orange !important;">Twitter Search</a> for realtime tweets.
+- (Optional) - <a href="https://commerce.coinbase.com/docs/api/" target="_blank" style="font-weight: bold; color: orange !important;">Coinbase Commerce</a> for accepting donations.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The frontend may be hosted on any desired service, however Netlify is by this author preferred.
 
-### Code Splitting
+## Contribute
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+A feature which may augment the usefulness of the app is a country selector. As of this current iteration, cumulative data from the United States has not been included.
